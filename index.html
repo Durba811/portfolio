@@ -16,492 +16,502 @@
   --forest: #1C3F2E;
   --terracotta: #B5502C;
   --gold: #B8840A;
-  --sage: #4A7A5E;
   --cream: #FDFAF4;
   --white: #FFFFFF;
   --border: rgba(24,20,13,0.1);
   --serif: 'Cormorant Garamond', Georgia, serif;
   --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
 }
-
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-
 html { scroll-behavior: smooth; }
-
 body {
   font-family: var(--sans);
   background: var(--parchment);
   color: var(--ink);
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─── SCROLL ANIMATIONS ─── */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
+/* REVEAL */
+.reveal { opacity:0; transform:translateY(22px); transition:opacity 0.65s ease, transform 0.65s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal-delay-1 { transition-delay:0.1s; }
+.reveal-delay-2 { transition-delay:0.2s; }
+.reveal-delay-3 { transition-delay:0.3s; }
 
-/* ─── NAVIGATION ─── */
+/* NAV */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 20px 56px;
-  display: flex; align-items: center; justify-content: space-between;
-  background: rgba(240,234,217,0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s;
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:20px 56px;
+  display:flex; align-items:center; justify-content:space-between;
+  background:rgba(240,234,217,0.93);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid transparent;
+  transition:border-color 0.3s;
 }
-nav.scrolled { border-color: var(--border); }
-.nav-name {
-  font-family: var(--serif);
-  font-size: 18px; font-weight: 600;
-  color: var(--ink); letter-spacing: 0.02em;
-}
-.nav-links { display: flex; gap: 36px; }
+nav.scrolled { border-color:var(--border); }
+.nav-name { font-family:var(--serif); font-size:18px; font-weight:600; color:var(--ink); letter-spacing:0.02em; }
+.nav-links { display:flex; gap:36px; }
 .nav-links a {
-  font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--ink-2);
-  text-decoration: none;
-  transition: color 0.2s;
-  position: relative;
+  font-size:12px; font-weight:500; letter-spacing:0.08em;
+  text-transform:uppercase; color:var(--ink-2); text-decoration:none;
+  transition:color 0.2s; position:relative;
 }
-.nav-links a::after {
-  content: ''; position: absolute; bottom: -2px; left: 0;
-  width: 0; height: 1px; background: var(--terracotta);
-  transition: width 0.25s;
-}
-.nav-links a:hover { color: var(--ink); }
-.nav-links a:hover::after { width: 100%; }
+.nav-links a::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1px; background:var(--terracotta); transition:width 0.25s; }
+.nav-links a:hover { color:var(--ink); }
+.nav-links a:hover::after { width:100%; }
 
-/* ─── HERO ─── */
-#hero {
-  min-height: 100vh;
-  display: grid; grid-template-columns: 1fr 1fr;
-  padding-top: 80px;
-}
-.hero-left {
-  padding: 80px 56px 80px 56px;
-  display: flex; flex-direction: column; justify-content: center;
-}
+/* HERO */
+#hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; padding-top:80px; }
+.hero-left { padding:80px 56px; display:flex; flex-direction:column; justify-content:center; }
 .hero-label {
-  font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--terracotta);
-  margin-bottom: 24px;
-  display: flex; align-items: center; gap: 12px;
+  font-size:11px; font-weight:500; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--terracotta); margin-bottom:24px;
+  display:flex; align-items:center; gap:12px;
 }
-.hero-label::before {
-  content: ''; width: 32px; height: 1px; background: var(--terracotta);
-}
+.hero-label::before { content:''; width:32px; height:1px; background:var(--terracotta); }
 .hero-name {
-  font-family: var(--serif);
-  font-size: clamp(56px, 6vw, 80px);
-  font-weight: 300; line-height: 1.0;
-  color: var(--ink); letter-spacing: -0.02em;
-  margin-bottom: 28px;
+  font-family:var(--serif);
+  font-size:clamp(52px,6vw,76px);
+  font-weight:300; line-height:1.0;
+  color:var(--ink); letter-spacing:-0.02em; margin-bottom:28px;
 }
-.hero-name em { font-style: italic; color: var(--forest); }
-.hero-divider {
-  width: 48px; height: 2px;
-  background: var(--terracotta); margin-bottom: 28px;
-}
+.hero-name em { font-style:italic; color:var(--forest); }
+.hero-divider { width:48px; height:2px; background:var(--terracotta); margin-bottom:28px; }
 .hero-bio {
-  font-size: 16px; color: var(--ink-2); line-height: 1.8;
-  max-width: 440px; margin-bottom: 40px;
-  font-weight: 300;
+  font-size:18px; color:var(--ink-2); line-height:1.85;
+  max-width:440px; margin-bottom:40px; font-weight:300;
 }
-.hero-bio strong { color: var(--ink); font-weight: 500; }
-.hero-actions { display: flex; gap: 16px; align-items: center; }
+.hero-bio strong { color:var(--ink); font-weight:500; }
+.hero-actions { display:flex; gap:16px; align-items:center; }
 .btn-primary {
-  padding: 13px 28px;
-  background: var(--forest); color: var(--cream);
-  font-family: var(--sans); font-size: 12px; font-weight: 500;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  text-decoration: none; border: none; cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
+  padding:13px 28px; background:var(--forest); color:var(--cream);
+  font-family:var(--sans); font-size:12px; font-weight:500;
+  letter-spacing:0.1em; text-transform:uppercase;
+  text-decoration:none; transition:background 0.2s, transform 0.2s;
 }
-.btn-primary:hover { background: var(--terracotta); transform: translateY(-1px); }
+.btn-primary:hover { background:var(--terracotta); transform:translateY(-1px); }
 .btn-ghost {
-  padding: 12px 28px;
-  background: transparent; color: var(--ink-2);
-  font-family: var(--sans); font-size: 12px; font-weight: 500;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  text-decoration: none; border: 1px solid var(--border);
-  transition: border-color 0.2s, color 0.2s;
+  padding:12px 28px; background:transparent; color:var(--ink-2);
+  font-family:var(--sans); font-size:12px; font-weight:500;
+  letter-spacing:0.1em; text-transform:uppercase;
+  text-decoration:none; border:1px solid var(--border);
+  transition:border-color 0.2s, color 0.2s;
 }
-.btn-ghost:hover { border-color: var(--ink-2); color: var(--ink); }
-
+.btn-ghost:hover { border-color:var(--ink-2); color:var(--ink); }
 .hero-right {
-  position: relative;
-  background: var(--parchment-2);
-  overflow: hidden;
-  display: flex; flex-direction: column; justify-content: flex-end;
+  position:relative; background:var(--parchment-2);
+  overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end;
 }
 .hero-photo-area {
-  flex: 1;
-  display: flex; align-items: center; justify-content: center;
-  padding: 60px 40px 20px;
+  flex:1; display:flex; align-items:center; justify-content:center;
+  padding:60px 40px 20px;
 }
 .photo-placeholder {
-  width: 240px; height: 300px;
-  background: var(--parchment);
-  border: 2px dashed var(--border);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 10px;
+  width:240px; height:300px;
+  background:var(--parchment); border:2px dashed var(--border);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
 }
-.photo-placeholder span {
-  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--ink-3); font-weight: 500;
-}
-.photo-placeholder svg { opacity: 0.3; }
-.hero-companies {
-  padding: 24px 40px;
-  border-top: 1px solid var(--border);
-}
-.hero-companies-label {
-  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--ink-3); margin-bottom: 10px;
-}
-.hero-companies-list {
-  display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
-}
-.company-badge {
-  font-family: var(--serif); font-size: 15px; font-weight: 600;
-  color: var(--ink-2); letter-spacing: 0.02em;
-}
+.photo-placeholder span { font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-3); font-weight:500; }
+.hero-companies { padding:24px 40px; border-top:1px solid var(--border); }
+.hero-companies-label { font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-3); margin-bottom:10px; }
+.hero-companies-list { display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
+.company-badge { font-family:var(--serif); font-size:15px; font-weight:600; color:var(--ink-2); }
 
-/* ─── STATS BAR ─── */
+/* STATS */
 #stats {
-  background: var(--forest); color: var(--cream);
-  padding: 48px 56px;
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 0;
+  background:var(--forest); color:var(--cream);
+  padding:48px 56px; display:grid; grid-template-columns:repeat(4,1fr);
 }
-.stat-item {
-  padding: 0 32px;
-  border-right: 1px solid rgba(255,255,255,0.1);
-  text-align: center;
-}
-.stat-item:first-child { padding-left: 0; }
-.stat-item:last-child { border-right: none; }
-.stat-n {
-  font-family: var(--serif);
-  font-size: 52px; font-weight: 300; line-height: 1;
-  color: var(--white); display: block; margin-bottom: 6px;
-}
-.stat-l {
-  font-size: 10px; font-weight: 500; letter-spacing: 0.15em;
-  text-transform: uppercase; color: rgba(255,255,255,0.55);
-}
+.stat-item { padding:0 32px; border-right:1px solid rgba(255,255,255,0.1); text-align:center; }
+.stat-item:first-child { padding-left:0; }
+.stat-item:last-child { border-right:none; }
+.stat-n { font-family:var(--serif); font-size:52px; font-weight:300; line-height:1; color:var(--white); display:block; margin-bottom:6px; }
+.stat-l { font-size:10px; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.55); }
 
-/* ─── ABOUT ─── */
-#about {
-  padding: 120px 56px;
-  max-width: 1100px; margin: 0 auto;
+/* IMPACT STRIP */
+#impact-strip { background:var(--cream); border-bottom:1px solid var(--border); padding:40px 56px; }
+.impact-strip-label {
+  font-size:9px; font-weight:500; letter-spacing:0.25em;
+  text-transform:uppercase; color:var(--terracotta); margin-bottom:24px; text-align:center;
 }
+.impact-grid { display:grid; grid-template-columns:repeat(6,1fr); }
+.impact-cell { padding:0 20px; text-align:center; border-right:1px solid var(--border); }
+.impact-cell:last-child { border-right:none; }
+.impact-cell-n { font-family:var(--serif); font-size:34px; font-weight:300; color:var(--forest); line-height:1; display:block; margin-bottom:5px; }
+.impact-cell-l { font-size:9px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); line-height:1.4; }
+
+/* ABOUT */
+#about { padding:120px 56px; max-width:1100px; margin:0 auto; }
 .about-philosophy {
-  font-family: var(--serif);
-  font-size: clamp(28px, 3.5vw, 44px);
-  font-weight: 300; font-style: italic;
-  line-height: 1.4; color: var(--ink);
-  max-width: 800px; margin-bottom: 60px;
+  font-family:var(--serif);
+  font-size:clamp(28px,3.5vw,44px);
+  font-weight:300; font-style:italic;
+  line-height:1.4; color:var(--ink); max-width:800px; margin-bottom:60px;
 }
-.about-philosophy strong {
-  font-style: normal; font-weight: 600;
-  color: var(--terracotta);
+.about-philosophy strong { font-style:normal; font-weight:600; color:var(--terracotta); }
+.about-grid { display:grid; grid-template-columns:1.4fr 1fr; gap:80px; align-items:start; }
+.about-text p { font-size:17px; color:var(--ink-2); line-height:1.9; margin-bottom:18px; font-weight:300; }
+.about-text p strong { color:var(--ink); font-weight:500; }
+.about-callout {
+  padding:22px 26px; border-left:3px solid var(--terracotta);
+  background:rgba(181,80,44,0.04); margin:22px 0;
 }
-.about-grid {
-  display: grid; grid-template-columns: 1.4fr 1fr;
-  gap: 80px; align-items: start;
-}
-.about-text p {
-  font-size: 15px; color: var(--ink-2); line-height: 1.9;
-  margin-bottom: 16px; font-weight: 300;
-}
-.about-text p strong { color: var(--ink); font-weight: 500; }
-.about-sidebar {}
-.sidebar-block { margin-bottom: 36px; }
-.sidebar-label {
-  font-size: 10px; font-weight: 500; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--terracotta);
-  margin-bottom: 12px; display: block;
-}
-.method-list {
-  display: flex; flex-wrap: wrap; gap: 6px;
-}
-.method-pill {
-  padding: 5px 12px;
-  border: 1px solid var(--border);
-  font-size: 11px; font-weight: 400; color: var(--ink-2);
-  background: transparent;
-}
-.edu-item { margin-bottom: 14px; }
-.edu-degree {
-  font-size: 13px; font-weight: 500; color: var(--ink);
-  margin-bottom: 2px;
-}
-.edu-school { font-size: 12px; color: var(--ink-3); }
+.about-callout p { font-size:16px; color:var(--ink-2); line-height:1.85; font-weight:300; margin:0; }
+.about-callout p strong { color:var(--ink); font-weight:500; }
+.sidebar-block { margin-bottom:36px; }
+.sidebar-label { font-size:10px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:var(--terracotta); margin-bottom:12px; display:block; }
+.method-list { display:flex; flex-wrap:wrap; gap:6px; }
+.method-pill { padding:5px 12px; border:1px solid var(--border); font-size:12px; font-weight:400; color:var(--ink-2); }
+.edu-item { margin-bottom:14px; }
+.edu-degree { font-size:14px; font-weight:500; color:var(--ink); margin-bottom:2px; }
+.edu-school { font-size:13px; color:var(--ink-3); }
 
-/* ─── WORK SECTION ─── */
-#work { padding: 0 0 80px; }
+/* ============================
+   CAREER JOURNEY TIMELINE
+   ============================ */
+#journey {
+  background:var(--cream);
+  padding:100px 56px;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.journey-heading {
+  font-family:var(--serif);
+  font-size:clamp(36px,4vw,52px);
+  font-weight:300; font-style:italic;
+  color:var(--ink); margin-bottom:64px;
+}
+.journey-timeline {
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(8, minmax(0, 1fr));
+  gap:0;
+  min-height:420px;
+}
+.journey-timeline::before {
+  content:'';
+  position:absolute;
+  left:0; right:0;
+  top:50%;
+  height:2px;
+  background:linear-gradient(90deg, var(--terracotta), var(--forest));
+  transform:translateY(-50%);
+}
+.journey-item {
+  position:relative;
+  display:flex;
+  justify-content:center;
+}
+.journey-item.top { align-items:flex-start; padding-bottom:230px; }
+.journey-item.bottom { align-items:flex-end; padding-top:230px; }
+.journey-card {
+  position:relative;
+  width:100%;
+  max-width:150px;
+  text-align:center;
+  padding:0 8px;
+}
+.journey-date {
+  font-family:var(--serif);
+  font-size:24px;
+  font-weight:700;
+  color:var(--forest);
+  line-height:1;
+  margin-bottom:10px;
+}
+.journey-badge {
+  display:inline-block;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  background:rgba(181,80,44,0.1);
+  color:var(--terracotta);
+  margin-bottom:8px;
+}
+.journey-role {
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--terracotta);
+  margin-bottom:8px;
+}
+.journey-desc {
+  font-size:12px;
+  color:var(--ink-2);
+  line-height:1.6;
+  font-weight:300;
+}
+.journey-marker {
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:var(--forest);
+  border:2px solid var(--cream);
+  box-shadow:0 0 0 2px var(--forest);
+  transform:translate(-50%, -50%);
+  z-index:2;
+}
+.journey-marker.highlight {
+  width:16px;
+  height:16px;
+  background:var(--terracotta);
+  box-shadow:0 0 0 2px var(--terracotta);
+}
+.journey-stem {
+  position:absolute;
+  left:50%;
+  width:1px;
+  background:rgba(24,20,13,0.18);
+  transform:translateX(-50%);
+}
+.journey-item.top .journey-stem {
+  top:calc(50% - 94px);
+  height:94px;
+}
+.journey-item.bottom .journey-stem {
+  top:50%;
+  height:94px;
+}
+
+/* WORK */
+#work { padding:0 0 80px; }
 .work-header {
-  padding: 80px 56px 60px;
-  display: flex; align-items: flex-end; justify-content: space-between;
-  border-bottom: 1px solid var(--border);
-  max-width: 1100px; margin: 0 auto;
+  padding:80px 56px 60px;
+  display:flex; align-items:flex-end; justify-content:space-between;
+  border-bottom:1px solid var(--border); max-width:1100px; margin:0 auto;
 }
-.work-heading {
-  font-family: var(--serif);
-  font-size: clamp(40px, 5vw, 60px);
-  font-weight: 300; color: var(--ink); line-height: 1;
-}
-.work-sub {
-  font-size: 13px; color: var(--ink-3); max-width: 280px; text-align: right;
-  line-height: 1.7; font-weight: 300;
-}
+.work-heading { font-family:var(--serif); font-size:clamp(40px,5vw,60px); font-weight:300; color:var(--ink); line-height:1; }
+.work-sub { font-size:14px; color:var(--ink-3); max-width:280px; text-align:right; line-height:1.7; font-weight:300; }
 
-/* ─── CASE STUDY ─── */
+/* CASE STUDY */
 .cs {
-  padding: 80px 56px;
-  max-width: 1100px; margin: 0 auto;
-  border-bottom: 1px solid var(--border);
-  position: relative;
+  padding:80px 56px; max-width:1100px; margin:0 auto;
+  border-bottom:1px solid var(--border); position:relative;
 }
 .cs-num-bg {
-  position: absolute; top: 60px; right: 40px;
-  font-family: var(--serif); font-size: 160px; font-weight: 700;
-  color: rgba(24,20,13,0.04); line-height: 1;
-  pointer-events: none; user-select: none;
+  position:absolute; top:60px; right:40px;
+  font-family:var(--serif); font-size:160px; font-weight:700;
+  color:rgba(24,20,13,0.04); line-height:1; pointer-events:none; user-select:none;
 }
-.cs-meta {
-  display: flex; gap: 10px; align-items: center;
-  margin-bottom: 20px;
-}
+.cs-meta { display:flex; gap:8px; align-items:center; margin-bottom:20px; flex-wrap:wrap; }
 .cs-tag {
-  font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
-  text-transform: uppercase; padding: 4px 12px;
-  border: 1px solid var(--border); color: var(--ink-2);
+  font-size:10px; font-weight:500; letter-spacing:0.12em;
+  text-transform:uppercase; padding:4px 12px;
+  border:1px solid var(--border); color:var(--ink-2);
 }
-.cs-tag-accent {
-  background: var(--terracotta); color: var(--white);
-  border-color: var(--terracotta);
-}
-.cs-tag-forest {
-  background: var(--forest); color: var(--white);
-  border-color: var(--forest);
-}
+.cs-tag-accent { background:var(--terracotta); color:var(--white); border-color:var(--terracotta); }
+.cs-tag-forest { background:var(--forest); color:var(--white); border-color:var(--forest); }
+.cs-tag-gold { background:var(--gold); color:var(--white); border-color:var(--gold); }
 .cs-heading {
-  font-family: var(--serif);
-  font-size: clamp(32px, 4vw, 50px);
-  font-weight: 300; color: var(--ink);
-  line-height: 1.15; margin-bottom: 18px;
-  max-width: 700px;
+  font-family:var(--serif);
+  font-size:clamp(30px,4vw,48px);
+  font-weight:300; color:var(--ink); line-height:1.15; margin-bottom:18px; max-width:700px;
 }
-.cs-hook {
-  font-size: 15px; color: var(--ink-2); max-width: 600px;
-  line-height: 1.8; margin-bottom: 48px; font-weight: 300;
+.cs-hook { font-size:17px; color:var(--ink-2); max-width:640px; line-height:1.85; margin-bottom:48px; font-weight:300; }
+
+/* IMAGE DISPLAY */
+.cs-img-wrap {
+  width:100%; margin-bottom:48px; text-align:center;
+}
+.cs-img-wrap img {
+  max-width:680px; width:100%; height:auto;
+  display:inline-block;
+  box-shadow:0 4px 32px rgba(24,20,13,0.1);
+}
+.cs-img-caption {
+  font-size:11px; color:var(--ink-3); margin-top:10px;
+  letter-spacing:0.08em; text-transform:uppercase;
 }
 
-/* IMAGE PLACEHOLDER */
-.cs-visual {
-  width: 100%; height: 280px;
-  background: linear-gradient(135deg, var(--parchment-2) 0%, var(--parchment) 100%);
-  border: 1px dashed rgba(24,20,13,0.15);
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 48px;
-  position: relative; overflow: hidden;
+/* PLACEHOLDER (for CS1 which has no image) */
+.cs-placeholder {
+  width:100%; height:240px;
+  background:linear-gradient(135deg, var(--parchment-2) 0%, var(--parchment) 100%);
+  border:1px dashed rgba(24,20,13,0.15);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:48px;
 }
-.cs-visual-label {
-  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--ink-3);
+.cs-placeholder-label { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-3); }
+
+/* LAB IMAGE */
+.lab-img-wrap {
+  margin-bottom:32px; text-align:center;
 }
-.cs-visual-corner {
-  position: absolute; bottom: 16px; right: 20px;
-  font-size: 10px; color: var(--ink-3); letter-spacing: 0.1em;
+.lab-img-wrap img {
+  max-width:680px; width:100%; height:auto;
+  display:inline-block;
+  box-shadow:0 4px 32px rgba(24,20,13,0.1);
 }
 
-/* THREE COLUMNS */
-.cs-cols {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 40px; margin-bottom: 48px;
-}
+.cs-cols { display:grid; grid-template-columns:repeat(3,1fr); gap:40px; margin-bottom:48px; }
 .cs-col-label {
-  font-size: 10px; font-weight: 500; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--terracotta);
-  margin-bottom: 12px; display: block;
+  font-size:10px; font-weight:500; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--terracotta); margin-bottom:12px; display:block;
 }
-.cs-col-text {
-  font-size: 13.5px; color: var(--ink-2); line-height: 1.85;
-  font-weight: 300;
-}
-.cs-col-text strong { color: var(--ink); font-weight: 500; }
-
-/* PULL QUOTE */
+.cs-col-text { font-size:15.5px; color:var(--ink-2); line-height:1.85; font-weight:300; }
+.cs-col-text strong { color:var(--ink); font-weight:500; }
 .cs-quote {
-  border-left: 3px solid var(--terracotta);
-  padding: 20px 32px;
-  margin: 0 0 40px;
-  background: rgba(181,80,44,0.04);
+  border-left:3px solid var(--terracotta); padding:22px 32px;
+  margin:0 0 40px; background:rgba(181,80,44,0.04);
 }
-.cs-quote p {
-  font-family: var(--serif); font-size: 22px; font-weight: 300;
-  font-style: italic; color: var(--ink); line-height: 1.5;
-}
+.cs-quote p { font-family:var(--serif); font-size:24px; font-weight:300; font-style:italic; color:var(--ink); line-height:1.5; }
+.cs-impact { display:flex; gap:0; border:1px solid var(--border); background:var(--cream); }
+.cs-metric { flex:1; padding:24px 28px; border-right:1px solid var(--border); text-align:center; }
+.cs-metric:last-child { border-right:none; }
+.cs-metric-n { font-family:var(--serif); font-size:38px; font-weight:300; color:var(--forest); display:block; line-height:1; margin-bottom:6px; }
+.cs-metric-l { font-size:10px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-3); }
 
-/* IMPACT METRICS */
-.cs-impact {
-  display: flex; gap: 0;
-  border: 1px solid var(--border);
-  background: var(--cream);
-}
-.cs-metric {
-  flex: 1; padding: 24px 28px;
-  border-right: 1px solid var(--border);
-  text-align: center;
-}
-.cs-metric:last-child { border-right: none; }
-.cs-metric-n {
-  font-family: var(--serif); font-size: 38px; font-weight: 300;
-  color: var(--forest); display: block; line-height: 1;
-  margin-bottom: 6px;
-}
-.cs-metric-l {
-  font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--ink-3);
-}
+/* ITERATION */
+.iter-row { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:40px; }
+.iter-card { padding:16px; border:1px solid var(--border); background:var(--cream); }
+.iter-card-fail { opacity:0.55; }
+.iter-card-win { border-color:var(--forest); background:rgba(28,63,46,0.04); }
+.iter-card-name { font-size:14px; font-weight:500; color:var(--ink); margin-bottom:6px; }
+.iter-card-note { font-size:12.5px; color:var(--ink-2); line-height:1.6; font-weight:300; margin-bottom:8px; }
+.iter-card-verdict { font-size:12px; font-weight:500; }
+.verdict-fail { color:var(--terracotta); }
+.verdict-win { color:var(--forest); }
 
-/* SPECIAL CALLOUT */
-.cs-callout {
-  padding: 20px 24px;
-  background: var(--cream);
-  border: 1px solid var(--border);
-  margin-bottom: 12px;
+/* LAB BLOCK */
+.lab-block {
+  background:var(--forest); color:var(--cream);
+  padding:36px 40px; margin:0 0 40px;
+  display:grid; grid-template-columns:1fr 1fr; gap:40px;
 }
-.cs-callout-title {
-  font-size: 12px; font-weight: 500; color: var(--ink);
-  margin-bottom: 5px;
-}
-.cs-callout-text { font-size: 12.5px; color: var(--ink-2); font-weight: 300; line-height: 1.7; }
+.lab-block-title { font-family:var(--serif); font-size:24px; font-weight:300; color:var(--white); margin-bottom:14px; line-height:1.3; }
+.lab-block-text { font-size:15px; color:rgba(255,255,255,0.72); line-height:1.85; font-weight:300; }
+.lab-block-text strong { color:var(--white); font-weight:500; }
+.lab-stats { display:flex; flex-direction:column; justify-content:center; gap:20px; }
+.lab-stat-row { display:flex; align-items:baseline; gap:12px; }
+.lab-stat-n { font-family:var(--serif); font-size:42px; font-weight:300; color:var(--white); line-height:1; }
+.lab-stat-l { font-size:12px; color:rgba(255,255,255,0.6); font-weight:300; line-height:1.4; }
 
-/* ITERATION ROW */
-.iter-row {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 12px; margin-bottom: 40px;
-}
-.iter-card {
-  padding: 16px;
-  border: 1px solid var(--border);
-  background: var(--cream);
-}
-.iter-card-fail { opacity: 0.55; }
-.iter-card-win {
-  border-color: var(--forest);
-  background: rgba(28,63,46,0.04);
-}
-.iter-card-name {
-  font-size: 13px; font-weight: 500; color: var(--ink);
-  margin-bottom: 6px;
-}
-.iter-card-note {
-  font-size: 11px; color: var(--ink-2); line-height: 1.6;
-  font-weight: 300; margin-bottom: 8px;
-}
-.iter-card-verdict {
-  font-size: 11px; font-weight: 500; letter-spacing: 0.05em;
-}
-.verdict-fail { color: #B5502C; }
-.verdict-win { color: var(--forest); }
-
-/* ─── CLOSING SECTION ─── */
+/* CLOSING */
 #closing {
-  background: var(--forest);
-  padding: 120px 56px;
-  text-align: center;
-  position: relative; overflow: hidden;
+  background:var(--forest); padding:120px 56px;
+  text-align:center; position:relative; overflow:hidden;
 }
 #closing::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 30% 50%, rgba(184,132,10,0.12), transparent 60%),
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at 30% 50%, rgba(184,132,10,0.12), transparent 60%),
               radial-gradient(ellipse at 70% 50%, rgba(181,80,44,0.08), transparent 60%);
 }
-.closing-content { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
-.closing-label {
-  font-size: 10px; font-weight: 500; letter-spacing: 0.25em;
-  text-transform: uppercase; color: rgba(255,255,255,0.5);
-  margin-bottom: 28px;
-}
+.closing-content { position:relative; z-index:1; max-width:700px; margin:0 auto; }
+.closing-label { font-size:10px; font-weight:500; letter-spacing:0.25em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:28px; }
 .closing-heading {
-  font-family: var(--serif);
-  font-size: clamp(36px, 5vw, 56px);
-  font-weight: 300; color: var(--white);
-  line-height: 1.2; margin-bottom: 24px;
+  font-family:var(--serif);
+  font-size:clamp(34px,5vw,54px);
+  font-weight:300; color:var(--white); line-height:1.2; margin-bottom:24px;
 }
-.closing-heading em { font-style: italic; color: rgba(255,255,255,0.7); }
-.closing-text {
-  font-size: 15px; color: rgba(255,255,255,0.65);
-  line-height: 1.9; font-weight: 300; margin-bottom: 48px;
+.closing-heading em { font-style:italic; color:rgba(255,255,255,0.65); }
+.closing-text { font-size:16.5px; color:rgba(255,255,255,0.65); line-height:1.9; font-weight:300; margin-bottom:48px; }
+.closing-text strong { color:rgba(255,255,255,0.9); font-weight:500; }
+.closing-value {
+  background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+  padding:28px 32px; margin-bottom:48px; text-align:left;
 }
-.closing-text strong { color: rgba(255,255,255,0.9); font-weight: 500; }
-.closing-actions { display: flex; gap: 16px; justify-content: center; margin-bottom: 64px; }
+.closing-value-label { font-size:9px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:12px; }
+.closing-value-text { font-size:15.5px; color:rgba(255,255,255,0.75); line-height:1.85; font-weight:300; }
+.closing-value-text strong { color:var(--white); font-weight:500; }
+.closing-actions { display:flex; gap:16px; justify-content:center; margin-bottom:64px; }
 .btn-light {
-  padding: 14px 32px;
-  background: var(--white); color: var(--forest);
-  font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
-  text-transform: uppercase; text-decoration: none;
-  transition: opacity 0.2s;
+  padding:14px 32px; background:var(--white); color:var(--forest);
+  font-size:12px; font-weight:500; letter-spacing:0.1em;
+  text-transform:uppercase; text-decoration:none; transition:opacity 0.2s;
 }
-.btn-light:hover { opacity: 0.88; }
+.btn-light:hover { opacity:0.88; }
 .btn-outline-light {
-  padding: 13px 32px;
-  background: transparent; color: rgba(255,255,255,0.8);
-  font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
-  text-transform: uppercase; text-decoration: none;
-  border: 1px solid rgba(255,255,255,0.3);
-  transition: border-color 0.2s, color 0.2s;
+  padding:13px 32px; background:transparent; color:rgba(255,255,255,0.8);
+  font-size:12px; font-weight:500; letter-spacing:0.1em;
+  text-transform:uppercase; text-decoration:none;
+  border:1px solid rgba(255,255,255,0.3);
+  transition:border-color 0.2s, color 0.2s;
 }
-.btn-outline-light:hover { border-color: rgba(255,255,255,0.7); color: var(--white); }
+.btn-outline-light:hover { border-color:rgba(255,255,255,0.7); color:var(--white); }
 .closing-contact {
-  display: flex; gap: 40px; justify-content: center;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 40px;
+  display:flex; gap:40px; justify-content:center;
+  border-top:1px solid rgba(255,255,255,0.1); padding-top:40px;
 }
-.closing-contact-item {
-  font-size: 12px; color: rgba(255,255,255,0.5);
-}
-.closing-contact-item span { color: rgba(255,255,255,0.85); display: block; margin-top: 3px; font-size: 13px; }
+.closing-contact-item { font-size:12px; color:rgba(255,255,255,0.45); }
+.closing-contact-item span { color:rgba(255,255,255,0.85); display:block; margin-top:3px; font-size:13px; }
 
-/* ─── FOOTER ─── */
-footer {
-  background: var(--ink); padding: 24px 56px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
+footer { background:var(--ink); padding:24px 56px; display:flex; align-items:center; justify-content:space-between; }
+footer p { font-size:11px; color:rgba(255,255,255,0.3); }
 
-/* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
-  nav { padding: 16px 24px; }
-  #hero { grid-template-columns: 1fr; }
-  .hero-right { display: none; }
-  .hero-left { padding: 100px 24px 60px; }
-  #stats { grid-template-columns: repeat(2, 1fr); padding: 40px 24px; }
-  #about { padding: 60px 24px; }
-  .about-grid { grid-template-columns: 1fr; gap: 40px; }
-  .work-header { padding: 60px 24px 40px; flex-direction: column; gap: 16px; }
-  .work-sub { text-align: left; }
-  .cs { padding: 60px 24px; }
-  .cs-cols { grid-template-columns: 1fr; gap: 24px; }
-  .iter-row { grid-template-columns: repeat(2, 1fr); }
-  #closing { padding: 80px 24px; }
-  .closing-contact { flex-direction: column; gap: 20px; }
-  footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+/* RESPONSIVE */
+@media (max-width:900px) {
+  nav { padding:16px 24px; }
+  .nav-links { gap:20px; }
+  #hero { grid-template-columns:1fr; }
+  .hero-right { display:none; }
+  .hero-left { padding:100px 24px 60px; }
+  #stats { grid-template-columns:repeat(2,1fr); padding:40px 24px; gap:24px; }
+  .stat-item { padding:0; border:none; }
+  #impact-strip { padding:32px 24px; }
+  .impact-grid { grid-template-columns:repeat(3,1fr); gap:20px; }
+  .impact-cell { border:none; }
+  #about { padding:60px 24px; }
+  .about-grid { grid-template-columns:1fr; gap:40px; }
+  #journey { padding:60px 24px; }
+  .journey-heading { margin-bottom:40px; }
+  .journey-timeline {
+    display:block;
+    min-height:0;
+    padding-left:26px;
+  }
+  .journey-timeline::before {
+    left:6px;
+    right:auto;
+    top:0;
+    bottom:0;
+    width:2px;
+    height:auto;
+    transform:none;
+    background:linear-gradient(180deg, var(--terracotta), var(--forest));
+  }
+  .journey-item,
+  .journey-item.top,
+  .journey-item.bottom {
+    display:block;
+    padding:0 0 34px 0;
+  }
+  .journey-item:last-child {
+    padding-bottom:0;
+  }
+  .journey-card {
+    max-width:none;
+    text-align:left;
+    padding:0 0 0 18px;
+  }
+  .journey-date {
+    font-size:26px;
+  }
+  .journey-marker,
+  .journey-marker.highlight {
+    left:6px;
+    top:8px;
+    transform:translateX(-50%);
+  }
+  .journey-stem {
+    display:none;
+  }
+  .work-header { padding:60px 24px 40px; flex-direction:column; gap:16px; }
+  .work-sub { text-align:left; }
+  .cs { padding:60px 24px; }
+  .cs-cols { grid-template-columns:1fr; gap:24px; }
+  .iter-row { grid-template-columns:repeat(2,1fr); }
+  .lab-block { grid-template-columns:1fr; }
+  #closing { padding:80px 24px; }
+  .closing-contact { flex-direction:column; gap:20px; align-items:center; }
+  footer { padding:20px 24px; flex-direction:column; gap:8px; text-align:center; }
 }
 </style>
 </head>
@@ -512,24 +522,20 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
   <div class="nav-name">Durba Chatterjee</div>
   <div class="nav-links">
     <a href="#about">About</a>
+    <a href="#journey">Journey</a>
     <a href="#work">Work</a>
     <a href="#closing">Contact</a>
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════
-     HERO
-═══════════════════════════════════ -->
+<!-- HERO -->
 <section id="hero">
   <div class="hero-left">
     <div class="hero-label">Senior UX Researcher</div>
-    <h1 class="hero-name">
-      I uncover<br>
-      <em>the unsaid.</em>
-    </h1>
+    <h1 class="hero-name">I uncover<br><em>the unsaid.</em></h1>
     <div class="hero-divider"></div>
     <p class="hero-bio">
-      Nine years researching humans across <strong>hardware, consumer apps, enterprise software, and voice interfaces</strong> — across India, the UK, Europe, the US, and beyond. Currently exploring roles in <strong>the Netherlands</strong>.
+      Nine years researching humans across <strong>hardware, consumer apps, enterprise software, and voice interfaces</strong> across more than ten countries. Foundational research, cross-cultural field work, and strategic recommendations that changed what got built.
     </p>
     <div class="hero-actions">
       <a href="#work" class="btn-primary">See My Work</a>
@@ -539,7 +545,7 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
   <div class="hero-right">
     <div class="hero-photo-area">
       <div class="photo-placeholder">
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
           <circle cx="20" cy="14" r="7" stroke="#A09585" stroke-width="1.5"/>
           <path d="M6 36c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#A09585" stroke-width="1.5"/>
         </svg>
@@ -550,40 +556,65 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
       <div class="hero-companies-label">Previously at</div>
       <div class="hero-companies-list">
         <span class="company-badge">Google</span>
-        <span style="color:var(--ink-3);">·</span>
+        <span style="color:var(--ink-3)">·</span>
         <span class="company-badge">SAP</span>
-        <span style="color:var(--ink-3);">·</span>
+        <span style="color:var(--ink-3)">·</span>
         <span class="company-badge">Ola</span>
-        <span style="color:var(--ink-3);">·</span>
+        <span style="color:var(--ink-3)">·</span>
         <span class="company-badge">HP</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- STATS BAR -->
+<!-- STATS -->
 <div id="stats">
   <div class="stat-item reveal">
-    <span class="stat-n">9</span>
-    <span class="stat-l">Years in UX Research</span>
+    <span class="stat-n">9</span><span class="stat-l">Years in UX Research</span>
   </div>
   <div class="stat-item reveal reveal-delay-1">
-    <span class="stat-n">10+</span>
-    <span class="stat-l">Countries Researched</span>
+    <span class="stat-n">10+</span><span class="stat-l">Countries Researched</span>
   </div>
   <div class="stat-item reveal reveal-delay-2">
-    <span class="stat-n">3</span>
-    <span class="stat-l">Design Award Products</span>
+    <span class="stat-n">3</span><span class="stat-l">International Design Awards</span>
   </div>
   <div class="stat-item reveal reveal-delay-3">
-    <span class="stat-n">$150K</span>
-    <span class="stat-l">Annual Vendor Saving (HP Lab)</span>
+    <span class="stat-n">$1M+</span><span class="stat-l">In At-Risk Costs Prevented</span>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════
-     ABOUT
-═══════════════════════════════════ -->
+<!-- IMPACT STRIP -->
+<div id="impact-strip">
+  <div class="impact-strip-label">Key Impact at a Glance</div>
+  <div class="impact-grid">
+    <div class="impact-cell reveal">
+      <span class="impact-cell-n">$150K</span>
+      <span class="impact-cell-l">Annual Vendor Saving via HP Lab</span>
+    </div>
+    <div class="impact-cell reveal reveal-delay-1">
+      <span class="impact-cell-n">30%</span>
+      <span class="impact-cell-l">Faster Study Turnaround</span>
+    </div>
+    <div class="impact-cell reveal reveal-delay-2">
+      <span class="impact-cell-n">30-40%</span>
+      <span class="impact-cell-l">Increase in Stakeholder Involvement</span>
+    </div>
+    <div class="impact-cell reveal reveal-delay-3">
+      <span class="impact-cell-n">20-30</span>
+      <span class="impact-cell-l">Researcher Days Saved via AI Workflows</span>
+    </div>
+    <div class="impact-cell reveal reveal-delay-1">
+      <span class="impact-cell-n">50+</span>
+      <span class="impact-cell-l">Studies Coordinated and Led</span>
+    </div>
+    <div class="impact-cell reveal reveal-delay-2">
+      <span class="impact-cell-n">4</span>
+      <span class="impact-cell-l">Companies, 4 Industries, 1 Consistent Outcome</span>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
 <section id="about">
   <p class="about-philosophy reveal">
     "Research that only confirms what you already believe
@@ -591,11 +622,13 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
     It is expensive decoration."
   </p>
   <div class="about-grid">
-    <div class="about-text reveal">
-      <p>My background is in <strong>Industrial and Organisational Psychology</strong> — which means I came into UX research already thinking about behaviour, motivation, and the gap between what people say and what they do. That lens has been useful across every domain I have worked in.</p>
-      <p>I have built research practices from scratch at organisations that did not have one. I have run field studies with first-time smartphone users in Tier 2 Indian cities, driver-partners navigating the gig economy, and print shop owners in markets global product teams never visit.</p>
-      <p>I have also made the call, more than once, that <strong>the research says we should not build this</strong>. That is the kind of researcher I am. Not a service function. A strategic one.</p>
-      <p>Nine years in, I still have the same curiosity I started with — and enough experience to know where AI-assisted workflows genuinely help and where they produce plausible-sounding noise that needs a human to catch it.</p>
+    <div class="about-text">
+      <p class="reveal">My background is in <strong>Industrial and Organisational Psychology.</strong> I came into UX research already thinking about behaviour, motivation, and the gap between what people say and what they do. That lens has been useful across every domain I have worked in.</p>
+      <p class="reveal reveal-delay-1">I have built research practices from scratch at organisations that did not have one. I have run field studies with first-time smartphone users in Tier 2 Indian cities, driver-partners navigating the gig economy, and print shop owners in markets global product teams never visit. I have presented findings to the <strong>Global Head of UX</strong> at HP and Ola, and to Senior Managers, Design Directors, and Product Directors across global teams.</p>
+      <div class="about-callout reveal reveal-delay-2">
+        <p>Operating as the sole researcher across a large product portfolio, I functioned as the <strong>de facto owner of research direction</strong> — identifying unstudied gaps, initiating projects without a brief, and building evidence bases that shaped multi-year product decisions. The Control Panel generative research, the PVC launch recommendation, and the HP usability lab were all self-directed moves that changed what got built and what did not.</p>
+      </div>
+      <p class="reveal reveal-delay-3">My research background spans markets, literacy levels, and cultural contexts that most product teams design for but rarely research directly. Across nine years and ten-plus countries, I have built methodology for users who do not fit the default assumption: first-time smartphone users, informal sector workers, people navigating complex products in second languages, in low-infrastructure environments. That experience is useful when a product's next growth market looks different from its home market.</p>
     </div>
     <div class="about-sidebar">
       <div class="sidebar-block reveal reveal-delay-1">
@@ -605,7 +638,7 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
           <span class="method-pill">Field Research</span>
           <span class="method-pill">Ethnography</span>
           <span class="method-pill">Contextual Inquiry</span>
-          <span class="method-pill">Surveys + Quant Analysis</span>
+          <span class="method-pill">Surveys and Quant Analysis</span>
           <span class="method-pill">Card Sorting</span>
           <span class="method-pill">A/B Testing</span>
           <span class="method-pill">Diary Studies</span>
@@ -616,8 +649,8 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
       <div class="sidebar-block reveal reveal-delay-2">
         <span class="sidebar-label">Tools</span>
         <div class="method-list">
-          <span class="method-pill">UserTesting.com</span>
-          <span class="method-pill">Qualtrics</span>
+          <span class="method-pill">UserTesting.com + Analytics</span>
+          <span class="method-pill">Qualtrics + Analytics</span>
           <span class="method-pill">HeyMarvin</span>
           <span class="method-pill">Optimal Workshop</span>
           <span class="method-pill">Figma</span>
@@ -627,339 +660,372 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
       <div class="sidebar-block reveal reveal-delay-3">
         <span class="sidebar-label">Education</span>
         <div class="edu-item">
-          <div class="edu-degree">M.A. Industrial &amp; Organisational Psychology</div>
-          <div class="edu-school">University of Calcutta · 2014–2016</div>
+          <div class="edu-degree">M.A. Industrial and Organisational Psychology</div>
+          <div class="edu-school">University of Calcutta, 2014 to 2016</div>
         </div>
         <div class="edu-item">
           <div class="edu-degree">B.A. (Hons) Psychology</div>
-          <div class="edu-school">Bethune College, Calcutta University · 2011–2014</div>
+          <div class="edu-school">Bethune College, Calcutta University, 2011 to 2014</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     WORK
-═══════════════════════════════════ -->
+<!-- CAREER JOURNEY -->
+<section id="journey">
+  <h2 class="journey-heading reveal">Career Journey</h2>
+
+  <div class="journey-timeline reveal">
+    <div class="journey-item top">
+      <div class="journey-card">
+        <div class="journey-date">2016</div>
+        <div class="journey-badge">Psychology Foundation</div>
+        <div class="journey-desc">Built the behavioural lens through Psychology and Industrial and Organisational Psychology.</div>
+      </div>
+      <span class="journey-stem"></span>
+      <span class="journey-marker"></span>
+    </div>
+
+    <div class="journey-item bottom">
+      <div class="journey-card">
+        <div class="journey-date">2017</div>
+        <div class="journey-role">Google Research Operations</div>
+        <div class="journey-desc">Coordinated 50+ studies across Google product teams, building research operations discipline.</div>
+      </div>
+      <span class="journey-stem"></span>
+      <span class="journey-marker"></span>
+    </div>
+
+    <div class="journey-item top">
+      <div class="journey-card">
+        <div class="journey-date">2017-19</div>
+        <div class="journey-badge">Promoted to Google NBU Researcher</div>
+        <div class="journey-desc">Moved into UX Research for Google Assistant and Android Go, studying first-time smartphone users, literacy, language, trust, and onboarding in India.</div>
+      </div>
+      <span class="journey-stem"></span>
+      <span class="journey-marker"></span>
+    </div>
+
+    <div class="journey-item bottom">
+      <div class="journey-card">
+        <div class="journey-date">2019</div>
+        <div class="journey-role">SAP SuccessFactors Researcher</div>
+        <div class="journey-desc">Researched complex enterprise HR workflows using usability testing, card sorting, A/B testing, and remote research.</div>
+      </div>
+      <span class="journey-stem"></span>
+      <span class="journey-marker"></span>
+    </div>
+
+    <div class="journey-item top">
+      <div class="journey-card">
+        <div class="journey-date">2019-20</div>
+        <div class="journey-badge">Ola Driver Researcher</div>
+        <div class="journey-desc">Led rider and driver research in real-world mobility contexts, uncovering behaviour under pressure and translating it into product direction.</div>
+      </div>
+      <span class="journey-stem"></span>
+      <span class="journey-marker highlight"></span>
+    </div>
+
+    <div class="journey-item bottom">
+      <div class="journey-card">
+        <div class="journey-date">2020-23</div>
+        <div class="journey-role">HP SOHO Printer Portfolio Researcher</div>
+        <div class="journey-desc">Owned research for HP's SOHO printer portfolio in India, running global hardware studies across multiple markets and printer lines.</div>
+      </div>
+      <span class="journey-stem"></span>
+      <span class="journey-marker"></span>
+    </div>
+
+    <div class="journey-item top">
+      <div class="journey-card">
+        <div class="journey-date">2023</div>
+        <div class="journey-badge">Promoted to Senior UX Researcher at HP</div>
+        <div class="journey-desc">Moved into strategic ownership of HP Control Panel research across Emerging and Developed Markets.</div>
+      </div>
+      <span class="journey-stem"></span>
+      <span class="journey-marker highlight"></span>
+    </div>
+
+    <div class="journey-item bottom">
+      <div class="journey-card">
+        <div class="journey-date">2023-26</div>
+        <div class="journey-role">HP Control Panel Research Lead</div>
+        <div class="journey-desc">Shaped next-generation small-screen printer experiences while building in-house research capability and AI-assisted research workflows.</div>
+      </div>
+      <span class="journey-stem"></span>
+      <span class="journey-marker highlight"></span>
+    </div>
+  </div>
+</section>
+<!-- WORK -->
 <section id="work">
   <div class="work-header">
     <h2 class="work-heading reveal">Selected Work</h2>
     <p class="work-sub reveal reveal-delay-1">Four studies. Each one changed something that would not have changed without the research.</p>
   </div>
 
-  <!-- ── CASE STUDY 01: PVC ── -->
+  <!-- CS 01: PVC -->
   <div class="cs">
     <div class="cs-num-bg">01</div>
     <div class="cs-meta reveal">
-      <span class="cs-tag cs-tag-accent">HP · India</span>
-      <span class="cs-tag">2023–2025</span>
+      <span class="cs-tag cs-tag-accent">HP India</span>
+      <span class="cs-tag">2023 to 2025</span>
       <span class="cs-tag">Field Research</span>
       <span class="cs-tag">Concept Validation</span>
     </div>
     <h3 class="cs-heading reveal">When the research said stop.</h3>
-    <p class="cs-hook reveal">HP had a P0 mandate to enter the PVC card printing market. I had a field study that said the current solution would hurt the brand before it helped it.</p>
-
-    <div class="cs-visual reveal">
-      <span class="cs-visual-label">Project image — add yours here</span>
-      <span class="cs-visual-corner">HP · PVC Card Printing Research</span>
+    <p class="cs-hook reveal">HP had a P0 mandate to enter the PVC card printing market. Research across 5 cities and 30+ jobbers revealed the product would hurt the brand before it helped it. An estimated $1M+ in at-risk launch investment was protected.</p>
+    <div class="cs-placeholder reveal">
+      <span class="cs-placeholder-label">Project image coming soon</span>
     </div>
-
     <div class="cs-cols">
       <div class="reveal">
         <span class="cs-col-label">The Situation</span>
-        <p class="cs-col-text">Brother owned the PVC card printing market in India — not through loyalty, but through the absence of competition. Jobbers (print shop workers who print hundreds of cards a day) were waiting for an alternative. HP's price point was right. The mandate was to move fast.</p>
+        <p class="cs-col-text">Brother owned the PVC card printing market in India through the absence of competition, not loyalty. Jobbers printing hundreds of cards daily in shops smaller than 10sqm were waiting for an affordable alternative. HP's price point landed well. The mandate was P0: move fast.</p>
       </div>
       <div class="reveal reveal-delay-1">
         <span class="cs-col-label">What I Found</span>
-        <p class="cs-col-text">Across 30+ jobbers in 5 cities, the appetite was real — but the design had a <strong>critical flaw</strong>. Fixing a card onto the HP carrier took more time and effort than Brother's workflow. In a shop where customers wait and switching costs are zero, that friction is revenue lost. A second phase of testing in Bangalore confirmed the problem persisted. One jobber shared a video: a Tier 3 city shop owner had already built his own workaround — and it looked like HP's engineered solution.</p>
+        <p class="cs-col-text">The appetite was real, but fixing a PVC card onto the HP carrier took significantly more time and effort than Brother's workflow. In a context where customers wait and switching costs are zero, that friction costs revenue. A second phase in Bangalore confirmed the problem persisted. One jobber shared a video circulating on WhatsApp: a Tier 3 city shop owner had already built his own workaround, and it looked remarkably similar to <strong>HP's engineered solution.</strong></p>
       </div>
       <div class="reveal reveal-delay-2">
         <span class="cs-col-label">What Changed</span>
-        <p class="cs-col-text">I gave the team a clear recommendation: this product is not ready, and iterating on a flawed mechanism risks damaging brand trust in a market HP is trying to enter for the first time. <strong>The programme was paused. The roadmap was reconsidered.</strong> Stopping a bad product from launching is not a failure of research. It is research working exactly as it should.</p>
+        <p class="cs-col-text">I gave the team a clear recommendation: this product is not ready, and iterating on a flawed mechanism risks damaging brand trust in a first-entry market. <strong>The programme was paused. The roadmap was reconsidered.</strong> An estimated $1M+ in direct launch costs was protected.</p>
       </div>
     </div>
-
     <div class="cs-quote reveal">
       <p>"Stopping a product from launching badly is not a failure of research. It is research working exactly as it should."</p>
     </div>
-
     <div class="cs-impact reveal">
-      <div class="cs-metric">
-        <span class="cs-metric-n">30+</span>
-        <span class="cs-metric-l">Jobbers &amp; Dealers</span>
-      </div>
-      <div class="cs-metric">
-        <span class="cs-metric-n">5</span>
-        <span class="cs-metric-l">Cities Visited</span>
-      </div>
-      <div class="cs-metric">
-        <span class="cs-metric-n">2</span>
-        <span class="cs-metric-l">Research Phases</span>
-      </div>
-      <div class="cs-metric">
-        <span class="cs-metric-n">1</span>
-        <span class="cs-metric-l">Bad Launch Prevented</span>
-      </div>
+      <div class="cs-metric"><span class="cs-metric-n">30+</span><span class="cs-metric-l">Jobbers and Dealers</span></div>
+      <div class="cs-metric"><span class="cs-metric-n">5</span><span class="cs-metric-l">Cities Visited</span></div>
+      <div class="cs-metric"><span class="cs-metric-n">2</span><span class="cs-metric-l">Research Phases</span></div>
+      <div class="cs-metric"><span class="cs-metric-n">$1M+</span><span class="cs-metric-l">At-Risk Costs Prevented</span></div>
     </div>
   </div>
 
-  <!-- ── CASE STUDY 02: CONTROL PANEL ── -->
+  <!-- CS 02: CONTROL PANEL -->
   <div class="cs">
     <div class="cs-num-bg">02</div>
     <div class="cs-meta reveal">
-      <span class="cs-tag cs-tag-forest">HP · India &amp; Global</span>
-      <span class="cs-tag">2020–2026</span>
+      <span class="cs-tag cs-tag-forest">HP India and Global</span>
+      <span class="cs-tag">2020 to 2026</span>
       <span class="cs-tag">Self-Initiated</span>
       <span class="cs-tag">Mixed Methods</span>
       <span class="cs-tag">3 Design Awards</span>
     </div>
     <h3 class="cs-heading reveal">The question nobody had asked.</h3>
-    <p class="cs-hook reveal">Hundreds of studies had been done on HP's control panels. None had ever asked what an ideal control panel experience should actually look like. I noticed that gap. Then I filled it — without a brief, without budget, with whatever resources I could find.</p>
+    <p class="cs-hook reveal">Hundreds of studies had been done on HP's control panels. None had asked what an ideal experience should be from the user's perspective. I identified that gap, built the evidence base without a brief or dedicated budget, and became the only person in the room with an answer when the redesign mandate arrived.</p>
 
-    <div class="cs-visual reveal">
-      <span class="cs-visual-label">Project image — add yours here</span>
-      <span class="cs-visual-corner">HP · Control Panel Research · 50–100 participants</span>
+    <div class="cs-img-wrap reveal">
+      <img src="assets/HP%20Control%20Panel.png" alt="HP Control Panel Research — defining the ideal small-screen printer experience" loading="lazy">
+      <div class="cs-img-caption">HP Control Panel Research</div>
     </div>
 
     <div class="cs-cols">
       <div class="reveal">
         <span class="cs-col-label">The Situation</span>
-        <p class="cs-col-text">HP was entering a cost optimisation phase. The brief was to redesign the control panel for low to mid-range printers. I had identified earlier — through self-initiated research using surplus UserTesting credits, piggyback probes, and informal conversations with shop owners — that no one had ever defined what "good" looked like from the user's side. I was the only one in the room with an evidence base when the mandate arrived.</p>
+        <p class="cs-col-text">HP entered a cost optimisation phase with a mandate to redesign the control panel for low to mid-range printers. Through surplus UserTesting credits, piggyback probes in unrelated sessions, and informal conversations with shop owners across literacy levels, I had already been building an evidence base that nobody had commissioned. <strong>When the brief arrived, I was the only one ready.</strong></p>
       </div>
       <div class="reveal reveal-delay-1">
         <span class="cs-col-label">What I Found</span>
-        <p class="cs-col-text">Four design directions were tested across 50–100 participants. Hybrid touchscreen failed on durability and cost. Icon-only buttons created too much cognitive load. A thermostat-style dial confused users because printers occupy a different mental model to appliances. When two late iterations were too close to call qualitatively, <strong>UserTesting analytics on task completion and time-on-task resolved the decision</strong> — users could articulate preferences but not performance.</p>
+        <p class="cs-col-text">Four design directions were tested across 50 to 100 participants. When two late iterations were too close to call qualitatively, <strong>UserTesting analytics on task completion and time-on-task resolved the debate.</strong> Users could articulate preferences but not performance. Across all iterations, one truth held: printer users want something that works the first time, without instruction. Not a gadget. A tool.</p>
       </div>
       <div class="reveal reveal-delay-2">
         <span class="cs-col-label">What Changed</span>
-        <p class="cs-col-text">The final direction: button-dominated, 2-line display, clear text labels, no icons requiring interpretation. Participants said it could be used by anyone — their children, their elderly parents. Production costs came down. The design shipped and was recognised at <strong>three international design awards</strong>, including the Singapore Good Design Award (2025) and the Red Dot Design Award.</p>
+        <p class="cs-col-text">The final direction: button-dominated, 2-line display, clear text labels, no icons requiring interpretation. Production costs came down. Participants said anyone could use it, from their children to their elderly parents. The design shipped and was recognised at <strong>three international design awards,</strong> including the Singapore Good Design Award (2025) and the Red Dot Design Award.</p>
       </div>
     </div>
 
-    <!-- Iteration row -->
     <div class="iter-row reveal">
       <div class="iter-card iter-card-fail">
         <div class="iter-card-name">Hybrid</div>
-        <div class="iter-card-note">2.4" touchscreen + buttons. Durability concerns, too small for larger hands, expensive.</div>
-        <div class="iter-card-verdict verdict-fail">✕ Discontinued</div>
+        <div class="iter-card-note">2.4" touchscreen and buttons. Durability concerns in shared environments, too small for larger hands, expensive to produce.</div>
+        <div class="iter-card-verdict verdict-fail">Discontinued</div>
       </div>
       <div class="iter-card iter-card-fail">
         <div class="iter-card-name">Enhanced</div>
-        <div class="iter-card-note">Icon-only buttons. High cognitive load. Extra +/− buttons helped but raised cost.</div>
-        <div class="iter-card-verdict verdict-fail">✕ Discontinued</div>
+        <div class="iter-card-note">Icon-only buttons. High cognitive load on variable tasks. Extra buttons helped but raised cost beyond viability.</div>
+        <div class="iter-card-verdict verdict-fail">Discontinued</div>
       </div>
       <div class="iter-card iter-card-fail">
         <div class="iter-card-name">Dial</div>
-        <div class="iter-card-note">Thermostat-style. Disorienting — printers aren't appliances in users' minds.</div>
-        <div class="iter-card-verdict verdict-fail">✕ Discontinued</div>
+        <div class="iter-card-note">Thermostat-style. Disorienting — printers are not household appliances in users' mental models.</div>
+        <div class="iter-card-verdict verdict-fail">Discontinued</div>
       </div>
       <div class="iter-card iter-card-win">
         <div class="iter-card-name">Final</div>
-        <div class="iter-card-note">Buttons, 2-line display, clear labels, no guesswork. Simple enough for anyone.</div>
-        <div class="iter-card-verdict verdict-win">✓ Shipped · Award-Recognised</div>
+        <div class="iter-card-note">Buttons, 2-line display, clear text labels. Simple enough for anyone. Production costs significantly reduced.</div>
+        <div class="iter-card-verdict verdict-win">Shipped and Award-Recognised</div>
+      </div>
+    </div>
+
+    <div class="lab-img-wrap reveal">
+      <img src="assets/HP%20Usability%20Lab.png" alt="HP Usability Lab — building research infrastructure for efficient studies" loading="lazy">
+      <div class="cs-img-caption" style="text-align:center;margin-top:10px;">HP Usability Lab, India</div>
+    </div>
+
+    <div class="lab-block reveal">
+      <div>
+        <div class="lab-block-title">Building the Lab That Made It Possible</div>
+        <p class="lab-block-text">The business case was built on a straightforward ROI argument: external vendors were costing <strong>$150K annually</strong> with turnaround times that created sprint bottlenecks. An in-house lab would pay for itself within the first year. It was built lean, without expensive equipment, relying entirely on process design and research infrastructure that scaled at low cost.</p>
+        <p class="lab-block-text" style="margin-top:14px;">The more significant shift was qualitative. Vendor-run studies felt clinical and scripted. Running sessions in-house gave the flexibility to cross-reference products and experiences not on the discussion guide, which consistently added downstream value. <strong>Stakeholder involvement in sessions increased by 30 to 40%.</strong> People who watched a session needed far less convincing than people who read a report.</p>
+      </div>
+      <div class="lab-stats">
+        <div class="lab-stat-row">
+          <span class="lab-stat-n">$150K</span>
+          <span class="lab-stat-l">Annual vendor costs saved</span>
+        </div>
+        <div class="lab-stat-row">
+          <span class="lab-stat-n">30%</span>
+          <span class="lab-stat-l">Faster study turnaround</span>
+        </div>
+        <div class="lab-stat-row">
+          <span class="lab-stat-n">40%</span>
+          <span class="lab-stat-l">Studies conducted internally</span>
+        </div>
+        <div class="lab-stat-row">
+          <span class="lab-stat-n">30-40%</span>
+          <span class="lab-stat-l">Increase in stakeholder session attendance</span>
+        </div>
       </div>
     </div>
 
     <div class="cs-quote reveal">
       <p>"That outcome started with a research gap I identified on my own, before anyone asked."</p>
     </div>
-
     <div class="cs-impact reveal">
-      <div class="cs-metric">
-        <span class="cs-metric-n">50–100</span>
-        <span class="cs-metric-l">Participants</span>
-      </div>
-      <div class="cs-metric">
-        <span class="cs-metric-n">4</span>
-        <span class="cs-metric-l">Design Directions Tested</span>
-      </div>
-      <div class="cs-metric">
-        <span class="cs-metric-n">3</span>
-        <span class="cs-metric-l">International Awards</span>
-      </div>
-      <div class="cs-metric">
-        <span class="cs-metric-n">$150K</span>
-        <span class="cs-metric-l">Annual Saving from Lab Built</span>
-      </div>
+      <div class="cs-metric"><span class="cs-metric-n">50-100</span><span class="cs-metric-l">Participants</span></div>
+      <div class="cs-metric"><span class="cs-metric-n">4</span><span class="cs-metric-l">Design Directions Tested</span></div>
+      <div class="cs-metric"><span class="cs-metric-n">3</span><span class="cs-metric-l">International Awards</span></div>
+      <div class="cs-metric"><span class="cs-metric-n">$150K</span><span class="cs-metric-l">Annual Saving from Lab</span></div>
     </div>
   </div>
 
-  <!-- ── CASE STUDY 03: OLA ── -->
+  <!-- CS 03: OLA -->
   <div class="cs">
     <div class="cs-num-bg">03</div>
     <div class="cs-meta reveal">
       <span class="cs-tag cs-tag-accent">Ola Cabs</span>
-      <span class="cs-tag">India &amp; London · 2019–2020</span>
+      <span class="cs-tag">India and London, 2019 to 2020</span>
       <span class="cs-tag">Field Research</span>
       <span class="cs-tag">Market Entry</span>
     </div>
-    <h3 class="cs-heading reveal">Research that changed direction — twice.</h3>
-    <p class="cs-hook reveal">In under a year at Ola, I ran field research that directly contradicted a product team's design rationale and led to a committed pivot — and then took full ownership of the company's first international market research, end to end.</p>
+    <h3 class="cs-heading reveal">Research that changed direction. Twice.</h3>
+    <p class="cs-hook reveal">In under a year at Ola, field research directly contradicted the product team's design rationale and led to a committed pivot approved by the Global Head of UX. Then I took full end-to-end ownership of the company's first international market research.</p>
 
-    <div class="cs-visual reveal">
-      <span class="cs-visual-label">Project image — add yours here</span>
-      <span class="cs-visual-corner">Ola · Driver Research + London Launch</span>
+    <div class="cs-img-wrap reveal">
+      <img src="assets/Ola%20Mobility%20Page.png" alt="Ola Mobility Research — finding behaviour that contradicted initial assumptions" loading="lazy">
+      <div class="cs-img-caption">Ola Mobility Research</div>
     </div>
 
     <div class="cs-cols">
       <div class="reveal">
-        <span class="cs-col-label">Part 1 · India</span>
-        <p class="cs-col-text">Ola's driver-partner app had a design rationale the team believed in. It had never been tested in the field. Across 15+ sessions combining mid-shift observations with in-depth interviews, I applied <strong>cognitive psychology frameworks</strong> to observed behaviour and found a clear pattern: drivers were developing workarounds, making repeated errors, and experiencing decision fatigue exactly where the product expected peak efficiency.</p>
+        <span class="cs-col-label">Part One, India</span>
+        <p class="cs-col-text">Ola's driver-partner app had a design rationale the team believed in. It had never been tested in the field. Across 15+ sessions combining mid-shift observations with in-depth interviews, I applied cognitive psychology frameworks to observed behaviour and found a consistent pattern: drivers were developing workarounds, making repeated errors, and experiencing decision fatigue exactly where the product expected peak efficiency.</p>
       </div>
       <div class="reveal reveal-delay-1">
-        <span class="cs-col-label">Part 2 · London</span>
-        <p class="cs-col-text">I took full ownership of Ola's London launch research — planning, budget, recruitment, logistics, discussion guide — for the company's first international expansion. The app had been built for India. London's context was entirely different: hidden payment structures, expat vs. local driver dynamics, pet-friendly rides, full upfront cost visibility. <strong>The research was right. Covid arrived before the iteration did.</strong> That does not change what the research found.</p>
+        <span class="cs-col-label">What Changed</span>
+        <p class="cs-col-text">I presented the evidence to the product director, design lead, and Global Head of UX: here is what drivers actually do, here is why the current design works against it, and here is what should change. The team pivoted the driver app's onboarding flow. Post-pivot, the redesigned flow showed <strong>measurable improvement in feature discoverability and task clarity,</strong> reducing friction and anxiety for drivers navigating the app during an active shift.</p>
       </div>
       <div class="reveal reveal-delay-2">
-        <span class="cs-col-label">What Changed</span>
-        <p class="cs-col-text">In India: I presented the driver behaviour evidence to the product director and design lead. The team pivoted the driver app's onboarding flow. It was the first time I presented findings that contradicted a decision already in motion and walked out with a committed change. In London: the findings mapped to a clear set of design priorities for the next phase. The right foundation was laid, even if it did not get built.</p>
+        <span class="cs-col-label">Part Two, London</span>
+        <p class="cs-col-text">I took full ownership of Ola's London launch research: planning, budget, recruitment, logistics, and discussion guide for the company's first international expansion. The research surfaced payment transparency concerns for drivers, expat versus local driver dynamics, and feature gaps against local competitor baselines. The findings mapped to a clear set of design priorities. Covid arrived before they were built. <strong>That does not change what the research found.</strong></p>
       </div>
     </div>
-
     <div class="cs-quote reveal">
       <p>"It was the first time I presented findings that contradicted a decision already in motion and walked out with a committed change. It was not the last."</p>
     </div>
-
     <div class="cs-impact reveal">
-      <div class="cs-metric">
-        <span class="cs-metric-n">15+</span>
-        <span class="cs-metric-l">Field Sessions · India</span>
-      </div>
-      <div class="cs-metric">
-        <span class="cs-metric-n">12</span>
-        <span class="cs-metric-l">Participants · London</span>
-      </div>
-      <div class="cs-metric">
-        <span class="cs-metric-n">2M+</span>
-        <span class="cs-metric-l">Daily Active Users on Platform</span>
-      </div>
-      <div class="cs-metric">
-        <span class="cs-metric-n">1</span>
-        <span class="cs-metric-l">Product Pivot Delivered</span>
-      </div>
+      <div class="cs-metric"><span class="cs-metric-n">15+</span><span class="cs-metric-l">Field Sessions, India</span></div>
+      <div class="cs-metric"><span class="cs-metric-n">12</span><span class="cs-metric-l">Participants, London</span></div>
+      <div class="cs-metric"><span class="cs-metric-n">2M+</span><span class="cs-metric-l">Daily Active Users on Platform</span></div>
+      <div class="cs-metric"><span class="cs-metric-n">1</span><span class="cs-metric-l">Product Pivot, Committed and Shipped</span></div>
     </div>
   </div>
 
-  <!-- ── CASE STUDY 04: GOOGLE NBU ── -->
+  <!-- CS 04: GOOGLE NBU -->
   <div class="cs">
     <div class="cs-num-bg">04</div>
     <div class="cs-meta reveal">
-      <span class="cs-tag" style="background:var(--gold);color:var(--white);border-color:var(--gold);">Google · NBU</span>
-      <span class="cs-tag">India · 2017–2019</span>
+      <span class="cs-tag cs-tag-gold">Google, NBU Initiative</span>
+      <span class="cs-tag">India, 2017 to 2019</span>
       <span class="cs-tag">Foundational Research</span>
       <span class="cs-tag">Cross-Cultural</span>
     </div>
-    <h3 class="cs-heading reveal">Design for users you haven't met yet.</h3>
-    <p class="cs-hook reveal">Google's Next Billion Users initiative asked: what does onboarding look like for someone who has never held a smartphone before? The answer required unlearning almost everything standard UX research assumes.</p>
+    <h3 class="cs-heading reveal">Design for users you have not met yet.</h3>
+    <p class="cs-hook reveal">Google's Next Billion Users initiative asked what onboarding looks like for someone who has never held a smartphone before. The answer required unlearning almost everything standard UX research assumes about who a user is.</p>
 
-    <div class="cs-visual reveal">
-      <span class="cs-visual-label">Project image — add yours here</span>
-      <span class="cs-visual-corner">Google NBU · Tier 2 Cities, India</span>
+    <div class="cs-img-wrap reveal">
+      <img src="assets/Google%20NBU%20Research.png" alt="Google NBU Research — designing for India's Next Billion Users" loading="lazy">
+      <div class="cs-img-caption">Google NBU Research</div>
     </div>
 
     <div class="cs-cols">
       <div class="reveal">
         <span class="cs-col-label">The Situation</span>
-        <p class="cs-col-text">First-time smartphone users in Tier 2 Indian cities, across varied literacy levels and languages. Google products had been designed by teams whose assumptions about users bore almost no relation to this context. My job was to surface the gap — accurately and without romanticising it.</p>
+        <p class="cs-col-text">First-time smartphone users in Tier 2 Indian cities across varied literacy levels and languages. Google products had been designed by teams whose assumptions about users bore almost no relation to this context. My job was to surface the gap accurately, without romanticising it.</p>
       </div>
       <div class="reveal reveal-delay-1">
         <span class="cs-col-label">What I Found</span>
-        <p class="cs-col-text">Three findings that changed the framing: <strong>visual literacy is not universal</strong> — icons the team treated as obvious carried no meaning. <strong>Social help-seeking is the recovery mode</strong> — users asked the person next to them, not the interface. And <strong>apprehensiveness is independent of capability</strong> — users who could complete a task hesitated because the cost of making a mistake felt too high. Permission prompts were the sharpest friction point.</p>
+        <p class="cs-col-text">Three findings that shifted the framing: <strong>visual literacy is not universal</strong> — icons the team treated as obvious carried no meaning. <strong>Social help-seeking is the recovery mode</strong> — users asked the person next to them, not the interface. And <strong>apprehensiveness is independent of capability</strong> — users who could complete a task hesitated because the perceived cost of a mistake felt too high. Permission prompts were the sharpest friction point.</p>
       </div>
       <div class="reveal reveal-delay-2">
         <span class="cs-col-label">What Changed</span>
-        <p class="cs-col-text">Findings were presented to the Google US team and added to the internal research repository. The research shaped the direction of follow-on NBU studies. More importantly, it shaped how I approach every cross-cultural study since: <strong>the failure is sometimes in the researcher's frame, not the product's design</strong>. Cross-cultural research teaches you to tell the difference — if you're paying attention.</p>
+        <p class="cs-col-text">Findings were presented to the Google US team and added to the internal research repository, shaping the direction of follow-on NBU studies. More lastingly, this work shaped how I approach every cross-cultural study since: <strong>the failure is sometimes in the researcher's frame, not the product's design.</strong> Field research in unfamiliar contexts teaches you to tell the difference, if you are paying attention.</p>
       </div>
     </div>
-
     <div class="cs-quote reveal">
-      <p>"Sometimes the failure is in the researcher's frame, not the product's design. Cross-cultural research teaches you to tell the difference — if you're paying attention."</p>
+      <p>"Sometimes the failure is in the researcher's frame, not the product's design. Cross-cultural research teaches you to tell the difference, if you are paying attention."</p>
     </div>
-
     <div class="cs-impact reveal">
-      <div class="cs-metric">
-        <span class="cs-metric-n">9</span>
-        <span class="cs-metric-l">Participants</span>
-      </div>
-      <div class="cs-metric">
-        <span class="cs-metric-n">3</span>
-        <span class="cs-metric-l">Tier 2 Cities</span>
-      </div>
-      <div class="cs-metric">
-        <span class="cs-metric-n">50+</span>
-        <span class="cs-metric-l">Studies Coordinated at Google</span>
-      </div>
-      <div class="cs-metric">
-        <span class="cs-metric-n">10+</span>
-        <span class="cs-metric-l">Countries Researched (career)</span>
-      </div>
+      <div class="cs-metric"><span class="cs-metric-n">9</span><span class="cs-metric-l">Participants</span></div>
+      <div class="cs-metric"><span class="cs-metric-n">3</span><span class="cs-metric-l">Tier 2 Cities</span></div>
+      <div class="cs-metric"><span class="cs-metric-n">50+</span><span class="cs-metric-l">Studies Coordinated at Google</span></div>
+      <div class="cs-metric"><span class="cs-metric-n">10+</span><span class="cs-metric-l">Countries Researched Across Career</span></div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     CLOSING
-═══════════════════════════════════ -->
+<!-- CLOSING -->
 <section id="closing">
   <div class="closing-content">
     <div class="closing-label reveal">What I am looking for</div>
-    <h2 class="closing-heading reveal">
-      A seat at the table where<br>
-      <em>strategy gets made.</em>
-    </h2>
+    <h2 class="closing-heading reveal">A seat at the table where<br><em>strategy gets made.</em></h2>
     <p class="closing-text reveal">
-      Nine years in, I know the difference between a researcher who runs good studies and one who <strong>changes what gets built</strong>. I have worked where there was no infrastructure and built it. I have worked where no prior research existed and established the evidence base. I have used AI to accelerate my workflow and have enough experience to know where it helps and where it needs watching.
-      <br><br>
-      I am based in Bangalore and actively exploring roles in <strong>the Netherlands</strong>. If you are building something that needs to work for people who do not look like your product team, I would like to talk.
+      Nine years in, I know the difference between a researcher who runs good studies and one who <strong>changes what gets built.</strong> I have worked where there was no infrastructure and built it. I have worked where no prior research existed and established the evidence base. I have introduced AI workflows that saved an estimated <strong>20 to 30 researcher-days annually</strong> and have enough experience to know where AI helps and where it needs watching.
     </p>
+    <div class="closing-value reveal">
+      <div class="closing-value-label">Why This Move, Why Now</div>
+      <p class="closing-value-text">Operating as the sole researcher across a large product portfolio, I functioned as the de facto owner of research direction for years: identifying gaps, initiating projects without a brief, and making calls that changed roadmaps. I am now looking for a role where <strong>that instinct is the formal scope,</strong> not a side effect of being the only researcher in the room. Mixed research and strategy, with cross-functional influence built in from the start.</p>
+    </div>
     <div class="closing-actions reveal">
       <a href="mailto:durba811@gmail.com" class="btn-light">durba811@gmail.com</a>
       <a href="#" class="btn-outline-light">View LinkedIn</a>
     </div>
     <div class="closing-contact reveal">
-      <div class="closing-contact-item">
-        Location
-        <span>Bangalore, India</span>
-      </div>
-      <div class="closing-contact-item">
-        Phone
-        <span>+91 9845729424</span>
-      </div>
-      <div class="closing-contact-item">
-        Availability
-        <span>Open to EU roles</span>
-      </div>
-      <div class="closing-contact-item">
-        Visa
-        <span>Requires sponsorship</span>
-      </div>
+      <div class="closing-contact-item">Location<span>Bangalore, India</span></div>
+      <div class="closing-contact-item">Phone<span>+91 9845729424</span></div>
+      <div class="closing-contact-item">Open To<span>Global Opportunities</span></div>
+      <div class="closing-contact-item">Visa<span>Requires Sponsorship</span></div>
     </div>
   </div>
 </section>
 
 <footer>
   <p>Durba Chatterjee · UX Research Portfolio · 2026</p>
-  <p>To add your photo and project images, replace the placeholder boxes with &lt;img&gt; tags</p>
+  <p>To add your photo, replace the placeholder box with an img tag</p>
 </footer>
 
 <script>
-// Scroll-triggered reveal
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
+    if (entry.isIntersecting) entry.target.classList.add('visible');
   });
-}, { threshold: 0.12 });
-
+}, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// Nav shadow on scroll
 const nav = document.getElementById('mainNav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-});
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
 </script>
 </body>
 </html>

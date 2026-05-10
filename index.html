@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Durba Chatterjee — UX Researcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --parchment: #F0EAD9;
+  --parchment-2: #E8DFC8;
+  --ink: #18140D;
+  --ink-2: #6B6050;
+  --ink-3: #A09585;
+  --forest: #1C3F2E;
+  --terracotta: #B5502C;
+  --gold: #B8840A;
+  --sage: #4A7A5E;
+  --cream: #FDFAF4;
+  --white: #FFFFFF;
+  --border: rgba(24,20,13,0.1);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--parchment);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── SCROLL ANIMATIONS ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ─── NAVIGATION ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(240,234,217,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+nav.scrolled { border-color: var(--border); }
+.nav-name {
+  font-family: var(--serif);
+  font-size: 18px; font-weight: 600;
+  color: var(--ink); letter-spacing: 0.02em;
+}
+.nav-links { display: flex; gap: 36px; }
+.nav-links a {
+  font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ink-2);
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -2px; left: 0;
+  width: 0; height: 1px; background: var(--terracotta);
+  transition: width 0.25s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a:hover::after { width: 100%; }
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  padding-top: 80px;
+}
+.hero-left {
+  padding: 80px 56px 80px 56px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.hero-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--terracotta);
+  margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-label::before {
+  content: ''; width: 32px; height: 1px; background: var(--terracotta);
+}
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(56px, 6vw, 80px);
+  font-weight: 300; line-height: 1.0;
+  color: var(--ink); letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+.hero-name em { font-style: italic; color: var(--forest); }
+.hero-divider {
+  width: 48px; height: 2px;
+  background: var(--terracotta); margin-bottom: 28px;
+}
+.hero-bio {
+  font-size: 16px; color: var(--ink-2); line-height: 1.8;
+  max-width: 440px; margin-bottom: 40px;
+  font-weight: 300;
+}
+.hero-bio strong { color: var(--ink); font-weight: 500; }
+.hero-actions { display: flex; gap: 16px; align-items: center; }
+.btn-primary {
+  padding: 13px 28px;
+  background: var(--forest); color: var(--cream);
+  font-family: var(--sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-primary:hover { background: var(--terracotta); transform: translateY(-1px); }
+.btn-ghost {
+  padding: 12px 28px;
+  background: transparent; color: var(--ink-2);
+  font-family: var(--sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none; border: 1px solid var(--border);
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--ink-2); color: var(--ink); }
+
+.hero-right {
+  position: relative;
+  background: var(--parchment-2);
+  overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.hero-photo-area {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px 40px 20px;
+}
+.photo-placeholder {
+  width: 240px; height: 300px;
+  background: var(--parchment);
+  border: 2px dashed var(--border);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px;
+}
+.photo-placeholder span {
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-3); font-weight: 500;
+}
+.photo-placeholder svg { opacity: 0.3; }
+.hero-companies {
+  padding: 24px 40px;
+  border-top: 1px solid var(--border);
+}
+.hero-companies-label {
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-3); margin-bottom: 10px;
+}
+.hero-companies-list {
+  display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
+}
+.company-badge {
+  font-family: var(--serif); font-size: 15px; font-weight: 600;
+  color: var(--ink-2); letter-spacing: 0.02em;
+}
+
+/* ─── STATS BAR ─── */
+#stats {
+  background: var(--forest); color: var(--cream);
+  padding: 48px 56px;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.stat-item {
+  padding: 0 32px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+}
+.stat-item:first-child { padding-left: 0; }
+.stat-item:last-child { border-right: none; }
+.stat-n {
+  font-family: var(--serif);
+  font-size: 52px; font-weight: 300; line-height: 1;
+  color: var(--white); display: block; margin-bottom: 6px;
+}
+.stat-l {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.15em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+}
+
+/* ─── ABOUT ─── */
+#about {
+  padding: 120px 56px;
+  max-width: 1100px; margin: 0 auto;
+}
+.about-philosophy {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 300; font-style: italic;
+  line-height: 1.4; color: var(--ink);
+  max-width: 800px; margin-bottom: 60px;
+}
+.about-philosophy strong {
+  font-style: normal; font-weight: 600;
+  color: var(--terracotta);
+}
+.about-grid {
+  display: grid; grid-template-columns: 1.4fr 1fr;
+  gap: 80px; align-items: start;
+}
+.about-text p {
+  font-size: 15px; color: var(--ink-2); line-height: 1.9;
+  margin-bottom: 16px; font-weight: 300;
+}
+.about-text p strong { color: var(--ink); font-weight: 500; }
+.about-sidebar {}
+.sidebar-block { margin-bottom: 36px; }
+.sidebar-label {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--terracotta);
+  margin-bottom: 12px; display: block;
+}
+.method-list {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.method-pill {
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  font-size: 11px; font-weight: 400; color: var(--ink-2);
+  background: transparent;
+}
+.edu-item { margin-bottom: 14px; }
+.edu-degree {
+  font-size: 13px; font-weight: 500; color: var(--ink);
+  margin-bottom: 2px;
+}
+.edu-school { font-size: 12px; color: var(--ink-3); }
+
+/* ─── WORK SECTION ─── */
+#work { padding: 0 0 80px; }
+.work-header {
+  padding: 80px 56px 60px;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  max-width: 1100px; margin: 0 auto;
+}
+.work-heading {
+  font-family: var(--serif);
+  font-size: clamp(40px, 5vw, 60px);
+  font-weight: 300; color: var(--ink); line-height: 1;
+}
+.work-sub {
+  font-size: 13px; color: var(--ink-3); max-width: 280px; text-align: right;
+  line-height: 1.7; font-weight: 300;
+}
+
+/* ─── CASE STUDY ─── */
+.cs {
+  padding: 80px 56px;
+  max-width: 1100px; margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.cs-num-bg {
+  position: absolute; top: 60px; right: 40px;
+  font-family: var(--serif); font-size: 160px; font-weight: 700;
+  color: rgba(24,20,13,0.04); line-height: 1;
+  pointer-events: none; user-select: none;
+}
+.cs-meta {
+  display: flex; gap: 10px; align-items: center;
+  margin-bottom: 20px;
+}
+.cs-tag {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 4px 12px;
+  border: 1px solid var(--border); color: var(--ink-2);
+}
+.cs-tag-accent {
+  background: var(--terracotta); color: var(--white);
+  border-color: var(--terracotta);
+}
+.cs-tag-forest {
+  background: var(--forest); color: var(--white);
+  border-color: var(--forest);
+}
+.cs-heading {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 300; color: var(--ink);
+  line-height: 1.15; margin-bottom: 18px;
+  max-width: 700px;
+}
+.cs-hook {
+  font-size: 15px; color: var(--ink-2); max-width: 600px;
+  line-height: 1.8; margin-bottom: 48px; font-weight: 300;
+}
+
+/* IMAGE PLACEHOLDER */
+.cs-visual {
+  width: 100%; height: 280px;
+  background: linear-gradient(135deg, var(--parchment-2) 0%, var(--parchment) 100%);
+  border: 1px dashed rgba(24,20,13,0.15);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 48px;
+  position: relative; overflow: hidden;
+}
+.cs-visual-label {
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.cs-visual-corner {
+  position: absolute; bottom: 16px; right: 20px;
+  font-size: 10px; color: var(--ink-3); letter-spacing: 0.1em;
+}
+
+/* THREE COLUMNS */
+.cs-cols {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 40px; margin-bottom: 48px;
+}
+.cs-col-label {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--terracotta);
+  margin-bottom: 12px; display: block;
+}
+.cs-col-text {
+  font-size: 13.5px; color: var(--ink-2); line-height: 1.85;
+  font-weight: 300;
+}
+.cs-col-text strong { color: var(--ink); font-weight: 500; }
+
+/* PULL QUOTE */
+.cs-quote {
+  border-left: 3px solid var(--terracotta);
+  padding: 20px 32px;
+  margin: 0 0 40px;
+  background: rgba(181,80,44,0.04);
+}
+.cs-quote p {
+  font-family: var(--serif); font-size: 22px; font-weight: 300;
+  font-style: italic; color: var(--ink); line-height: 1.5;
+}
+
+/* IMPACT METRICS */
+.cs-impact {
+  display: flex; gap: 0;
+  border: 1px solid var(--border);
+  background: var(--cream);
+}
+.cs-metric {
+  flex: 1; padding: 24px 28px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+.cs-metric:last-child { border-right: none; }
+.cs-metric-n {
+  font-family: var(--serif); font-size: 38px; font-weight: 300;
+  color: var(--forest); display: block; line-height: 1;
+  margin-bottom: 6px;
+}
+.cs-metric-l {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+
+/* SPECIAL CALLOUT */
+.cs-callout {
+  padding: 20px 24px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+.cs-callout-title {
+  font-size: 12px; font-weight: 500; color: var(--ink);
+  margin-bottom: 5px;
+}
+.cs-callout-text { font-size: 12.5px; color: var(--ink-2); font-weight: 300; line-height: 1.7; }
+
+/* ITERATION ROW */
+.iter-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 12px; margin-bottom: 40px;
+}
+.iter-card {
+  padding: 16px;
+  border: 1px solid var(--border);
+  background: var(--cream);
+}
+.iter-card-fail { opacity: 0.55; }
+.iter-card-win {
+  border-color: var(--forest);
+  background: rgba(28,63,46,0.04);
+}
+.iter-card-name {
+  font-size: 13px; font-weight: 500; color: var(--ink);
+  margin-bottom: 6px;
+}
+.iter-card-note {
+  font-size: 11px; color: var(--ink-2); line-height: 1.6;
+  font-weight: 300; margin-bottom: 8px;
+}
+.iter-card-verdict {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.05em;
+}
+.verdict-fail { color: #B5502C; }
+.verdict-win { color: var(--forest); }
+
+/* ─── CLOSING SECTION ─── */
+#closing {
+  background: var(--forest);
+  padding: 120px 56px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+#closing::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(184,132,10,0.12), transparent 60%),
+              radial-gradient(ellipse at 70% 50%, rgba(181,80,44,0.08), transparent 60%);
+}
+.closing-content { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+.closing-label {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.25em;
+  text-transform: uppercase; color: rgba(255,255,255,0.5);
+  margin-bottom: 28px;
+}
+.closing-heading {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 300; color: var(--white);
+  line-height: 1.2; margin-bottom: 24px;
+}
+.closing-heading em { font-style: italic; color: rgba(255,255,255,0.7); }
+.closing-text {
+  font-size: 15px; color: rgba(255,255,255,0.65);
+  line-height: 1.9; font-weight: 300; margin-bottom: 48px;
+}
+.closing-text strong { color: rgba(255,255,255,0.9); font-weight: 500; }
+.closing-actions { display: flex; gap: 16px; justify-content: center; margin-bottom: 64px; }
+.btn-light {
+  padding: 14px 32px;
+  background: var(--white); color: var(--forest);
+  font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; text-decoration: none;
+  transition: opacity 0.2s;
+}
+.btn-light:hover { opacity: 0.88; }
+.btn-outline-light {
+  padding: 13px 32px;
+  background: transparent; color: rgba(255,255,255,0.8);
+  font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-outline-light:hover { border-color: rgba(255,255,255,0.7); color: var(--white); }
+.closing-contact {
+  display: flex; gap: 40px; justify-content: center;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 40px;
+}
+.closing-contact-item {
+  font-size: 12px; color: rgba(255,255,255,0.5);
+}
+.closing-contact-item span { color: rgba(255,255,255,0.85); display: block; margin-top: 3px; font-size: 13px; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--ink); padding: 24px 56px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  #hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 100px 24px 60px; }
+  #stats { grid-template-columns: repeat(2, 1fr); padding: 40px 24px; }
+  #about { padding: 60px 24px; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .work-header { padding: 60px 24px 40px; flex-direction: column; gap: 16px; }
+  .work-sub { text-align: left; }
+  .cs { padding: 60px 24px; }
+  .cs-cols { grid-template-columns: 1fr; gap: 24px; }
+  .iter-row { grid-template-columns: repeat(2, 1fr); }
+  #closing { padding: 80px 24px; }
+  .closing-contact { flex-direction: column; gap: 20px; }
+  footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-name">Durba Chatterjee</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#closing">Contact</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════
+     HERO
+═══════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-label">Senior UX Researcher</div>
+    <h1 class="hero-name">
+      I uncover<br>
+      <em>the unsaid.</em>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-bio">
+      Nine years researching humans across <strong>hardware, consumer apps, enterprise software, and voice interfaces</strong> — across India, the UK, Europe, the US, and beyond. Currently exploring roles in <strong>the Netherlands</strong>.
+    </p>
+    <div class="hero-actions">
+      <a href="#work" class="btn-primary">See My Work</a>
+      <a href="#closing" class="btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-area">
+      <div class="photo-placeholder">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="14" r="7" stroke="#A09585" stroke-width="1.5"/>
+          <path d="M6 36c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#A09585" stroke-width="1.5"/>
+        </svg>
+        <span>Add your photo</span>
+      </div>
+    </div>
+    <div class="hero-companies">
+      <div class="hero-companies-label">Previously at</div>
+      <div class="hero-companies-list">
+        <span class="company-badge">Google</span>
+        <span style="color:var(--ink-3);">·</span>
+        <span class="company-badge">SAP</span>
+        <span style="color:var(--ink-3);">·</span>
+        <span class="company-badge">Ola</span>
+        <span style="color:var(--ink-3);">·</span>
+        <span class="company-badge">HP</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div id="stats">
+  <div class="stat-item reveal">
+    <span class="stat-n">9</span>
+    <span class="stat-l">Years in UX Research</span>
+  </div>
+  <div class="stat-item reveal reveal-delay-1">
+    <span class="stat-n">10+</span>
+    <span class="stat-l">Countries Researched</span>
+  </div>
+  <div class="stat-item reveal reveal-delay-2">
+    <span class="stat-n">3</span>
+    <span class="stat-l">Design Award Products</span>
+  </div>
+  <div class="stat-item reveal reveal-delay-3">
+    <span class="stat-n">$150K</span>
+    <span class="stat-l">Annual Vendor Saving (HP Lab)</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     ABOUT
+═══════════════════════════════════ -->
+<section id="about">
+  <p class="about-philosophy reveal">
+    "Research that only confirms what you already believe
+    <strong>is not research.</strong>
+    It is expensive decoration."
+  </p>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>My background is in <strong>Industrial and Organisational Psychology</strong> — which means I came into UX research already thinking about behaviour, motivation, and the gap between what people say and what they do. That lens has been useful across every domain I have worked in.</p>
+      <p>I have built research practices from scratch at organisations that did not have one. I have run field studies with first-time smartphone users in Tier 2 Indian cities, driver-partners navigating the gig economy, and print shop owners in markets global product teams never visit.</p>
+      <p>I have also made the call, more than once, that <strong>the research says we should not build this</strong>. That is the kind of researcher I am. Not a service function. A strategic one.</p>
+      <p>Nine years in, I still have the same curiosity I started with — and enough experience to know where AI-assisted workflows genuinely help and where they produce plausible-sounding noise that needs a human to catch it.</p>
+    </div>
+    <div class="about-sidebar">
+      <div class="sidebar-block reveal reveal-delay-1">
+        <span class="sidebar-label">Methods</span>
+        <div class="method-list">
+          <span class="method-pill">Usability Testing</span>
+          <span class="method-pill">Field Research</span>
+          <span class="method-pill">Ethnography</span>
+          <span class="method-pill">Contextual Inquiry</span>
+          <span class="method-pill">Surveys + Quant Analysis</span>
+          <span class="method-pill">Card Sorting</span>
+          <span class="method-pill">A/B Testing</span>
+          <span class="method-pill">Diary Studies</span>
+          <span class="method-pill">Journey Mapping</span>
+          <span class="method-pill">Piggyback Interviews</span>
+        </div>
+      </div>
+      <div class="sidebar-block reveal reveal-delay-2">
+        <span class="sidebar-label">Tools</span>
+        <div class="method-list">
+          <span class="method-pill">UserTesting.com</span>
+          <span class="method-pill">Qualtrics</span>
+          <span class="method-pill">HeyMarvin</span>
+          <span class="method-pill">Optimal Workshop</span>
+          <span class="method-pill">Figma</span>
+          <span class="method-pill">AI Research Workflows</span>
+        </div>
+      </div>
+      <div class="sidebar-block reveal reveal-delay-3">
+        <span class="sidebar-label">Education</span>
+        <div class="edu-item">
+          <div class="edu-degree">M.A. Industrial &amp; Organisational Psychology</div>
+          <div class="edu-school">University of Calcutta · 2014–2016</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">B.A. (Hons) Psychology</div>
+          <div class="edu-school">Bethune College, Calcutta University · 2011–2014</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     WORK
+═══════════════════════════════════ -->
+<section id="work">
+  <div class="work-header">
+    <h2 class="work-heading reveal">Selected Work</h2>
+    <p class="work-sub reveal reveal-delay-1">Four studies. Each one changed something that would not have changed without the research.</p>
+  </div>
+
+  <!-- ── CASE STUDY 01: PVC ── -->
+  <div class="cs">
+    <div class="cs-num-bg">01</div>
+    <div class="cs-meta reveal">
+      <span class="cs-tag cs-tag-accent">HP · India</span>
+      <span class="cs-tag">2023–2025</span>
+      <span class="cs-tag">Field Research</span>
+      <span class="cs-tag">Concept Validation</span>
+    </div>
+    <h3 class="cs-heading reveal">When the research said stop.</h3>
+    <p class="cs-hook reveal">HP had a P0 mandate to enter the PVC card printing market. I had a field study that said the current solution would hurt the brand before it helped it.</p>
+
+    <div class="cs-visual reveal">
+      <span class="cs-visual-label">Project image — add yours here</span>
+      <span class="cs-visual-corner">HP · PVC Card Printing Research</span>
+    </div>
+
+    <div class="cs-cols">
+      <div class="reveal">
+        <span class="cs-col-label">The Situation</span>
+        <p class="cs-col-text">Brother owned the PVC card printing market in India — not through loyalty, but through the absence of competition. Jobbers (print shop workers who print hundreds of cards a day) were waiting for an alternative. HP's price point was right. The mandate was to move fast.</p>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <span class="cs-col-label">What I Found</span>
+        <p class="cs-col-text">Across 30+ jobbers in 5 cities, the appetite was real — but the design had a <strong>critical flaw</strong>. Fixing a card onto the HP carrier took more time and effort than Brother's workflow. In a shop where customers wait and switching costs are zero, that friction is revenue lost. A second phase of testing in Bangalore confirmed the problem persisted. One jobber shared a video: a Tier 3 city shop owner had already built his own workaround — and it looked like HP's engineered solution.</p>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <span class="cs-col-label">What Changed</span>
+        <p class="cs-col-text">I gave the team a clear recommendation: this product is not ready, and iterating on a flawed mechanism risks damaging brand trust in a market HP is trying to enter for the first time. <strong>The programme was paused. The roadmap was reconsidered.</strong> Stopping a bad product from launching is not a failure of research. It is research working exactly as it should.</p>
+      </div>
+    </div>
+
+    <div class="cs-quote reveal">
+      <p>"Stopping a product from launching badly is not a failure of research. It is research working exactly as it should."</p>
+    </div>
+
+    <div class="cs-impact reveal">
+      <div class="cs-metric">
+        <span class="cs-metric-n">30+</span>
+        <span class="cs-metric-l">Jobbers &amp; Dealers</span>
+      </div>
+      <div class="cs-metric">
+        <span class="cs-metric-n">5</span>
+        <span class="cs-metric-l">Cities Visited</span>
+      </div>
+      <div class="cs-metric">
+        <span class="cs-metric-n">2</span>
+        <span class="cs-metric-l">Research Phases</span>
+      </div>
+      <div class="cs-metric">
+        <span class="cs-metric-n">1</span>
+        <span class="cs-metric-l">Bad Launch Prevented</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CASE STUDY 02: CONTROL PANEL ── -->
+  <div class="cs">
+    <div class="cs-num-bg">02</div>
+    <div class="cs-meta reveal">
+      <span class="cs-tag cs-tag-forest">HP · India &amp; Global</span>
+      <span class="cs-tag">2020–2026</span>
+      <span class="cs-tag">Self-Initiated</span>
+      <span class="cs-tag">Mixed Methods</span>
+      <span class="cs-tag">3 Design Awards</span>
+    </div>
+    <h3 class="cs-heading reveal">The question nobody had asked.</h3>
+    <p class="cs-hook reveal">Hundreds of studies had been done on HP's control panels. None had ever asked what an ideal control panel experience should actually look like. I noticed that gap. Then I filled it — without a brief, without budget, with whatever resources I could find.</p>
+
+    <div class="cs-visual reveal">
+      <span class="cs-visual-label">Project image — add yours here</span>
+      <span class="cs-visual-corner">HP · Control Panel Research · 50–100 participants</span>
+    </div>
+
+    <div class="cs-cols">
+      <div class="reveal">
+        <span class="cs-col-label">The Situation</span>
+        <p class="cs-col-text">HP was entering a cost optimisation phase. The brief was to redesign the control panel for low to mid-range printers. I had identified earlier — through self-initiated research using surplus UserTesting credits, piggyback probes, and informal conversations with shop owners — that no one had ever defined what "good" looked like from the user's side. I was the only one in the room with an evidence base when the mandate arrived.</p>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <span class="cs-col-label">What I Found</span>
+        <p class="cs-col-text">Four design directions were tested across 50–100 participants. Hybrid touchscreen failed on durability and cost. Icon-only buttons created too much cognitive load. A thermostat-style dial confused users because printers occupy a different mental model to appliances. When two late iterations were too close to call qualitatively, <strong>UserTesting analytics on task completion and time-on-task resolved the decision</strong> — users could articulate preferences but not performance.</p>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <span class="cs-col-label">What Changed</span>
+        <p class="cs-col-text">The final direction: button-dominated, 2-line display, clear text labels, no icons requiring interpretation. Participants said it could be used by anyone — their children, their elderly parents. Production costs came down. The design shipped and was recognised at <strong>three international design awards</strong>, including the Singapore Good Design Award (2025) and the Red Dot Design Award.</p>
+      </div>
+    </div>
+
+    <!-- Iteration row -->
+    <div class="iter-row reveal">
+      <div class="iter-card iter-card-fail">
+        <div class="iter-card-name">Hybrid</div>
+        <div class="iter-card-note">2.4" touchscreen + buttons. Durability concerns, too small for larger hands, expensive.</div>
+        <div class="iter-card-verdict verdict-fail">✕ Discontinued</div>
+      </div>
+      <div class="iter-card iter-card-fail">
+        <div class="iter-card-name">Enhanced</div>
+        <div class="iter-card-note">Icon-only buttons. High cognitive load. Extra +/− buttons helped but raised cost.</div>
+        <div class="iter-card-verdict verdict-fail">✕ Discontinued</div>
+      </div>
+      <div class="iter-card iter-card-fail">
+        <div class="iter-card-name">Dial</div>
+        <div class="iter-card-note">Thermostat-style. Disorienting — printers aren't appliances in users' minds.</div>
+        <div class="iter-card-verdict verdict-fail">✕ Discontinued</div>
+      </div>
+      <div class="iter-card iter-card-win">
+        <div class="iter-card-name">Final</div>
+        <div class="iter-card-note">Buttons, 2-line display, clear labels, no guesswork. Simple enough for anyone.</div>
+        <div class="iter-card-verdict verdict-win">✓ Shipped · Award-Recognised</div>
+      </div>
+    </div>
+
+    <div class="cs-quote reveal">
+      <p>"That outcome started with a research gap I identified on my own, before anyone asked."</p>
+    </div>
+
+    <div class="cs-impact reveal">
+      <div class="cs-metric">
+        <span class="cs-metric-n">50–100</span>
+        <span class="cs-metric-l">Participants</span>
+      </div>
+      <div class="cs-metric">
+        <span class="cs-metric-n">4</span>
+        <span class="cs-metric-l">Design Directions Tested</span>
+      </div>
+      <div class="cs-metric">
+        <span class="cs-metric-n">3</span>
+        <span class="cs-metric-l">International Awards</span>
+      </div>
+      <div class="cs-metric">
+        <span class="cs-metric-n">$150K</span>
+        <span class="cs-metric-l">Annual Saving from Lab Built</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CASE STUDY 03: OLA ── -->
+  <div class="cs">
+    <div class="cs-num-bg">03</div>
+    <div class="cs-meta reveal">
+      <span class="cs-tag cs-tag-accent">Ola Cabs</span>
+      <span class="cs-tag">India &amp; London · 2019–2020</span>
+      <span class="cs-tag">Field Research</span>
+      <span class="cs-tag">Market Entry</span>
+    </div>
+    <h3 class="cs-heading reveal">Research that changed direction — twice.</h3>
+    <p class="cs-hook reveal">In under a year at Ola, I ran field research that directly contradicted a product team's design rationale and led to a committed pivot — and then took full ownership of the company's first international market research, end to end.</p>
+
+    <div class="cs-visual reveal">
+      <span class="cs-visual-label">Project image — add yours here</span>
+      <span class="cs-visual-corner">Ola · Driver Research + London Launch</span>
+    </div>
+
+    <div class="cs-cols">
+      <div class="reveal">
+        <span class="cs-col-label">Part 1 · India</span>
+        <p class="cs-col-text">Ola's driver-partner app had a design rationale the team believed in. It had never been tested in the field. Across 15+ sessions combining mid-shift observations with in-depth interviews, I applied <strong>cognitive psychology frameworks</strong> to observed behaviour and found a clear pattern: drivers were developing workarounds, making repeated errors, and experiencing decision fatigue exactly where the product expected peak efficiency.</p>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <span class="cs-col-label">Part 2 · London</span>
+        <p class="cs-col-text">I took full ownership of Ola's London launch research — planning, budget, recruitment, logistics, discussion guide — for the company's first international expansion. The app had been built for India. London's context was entirely different: hidden payment structures, expat vs. local driver dynamics, pet-friendly rides, full upfront cost visibility. <strong>The research was right. Covid arrived before the iteration did.</strong> That does not change what the research found.</p>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <span class="cs-col-label">What Changed</span>
+        <p class="cs-col-text">In India: I presented the driver behaviour evidence to the product director and design lead. The team pivoted the driver app's onboarding flow. It was the first time I presented findings that contradicted a decision already in motion and walked out with a committed change. In London: the findings mapped to a clear set of design priorities for the next phase. The right foundation was laid, even if it did not get built.</p>
+      </div>
+    </div>
+
+    <div class="cs-quote reveal">
+      <p>"It was the first time I presented findings that contradicted a decision already in motion and walked out with a committed change. It was not the last."</p>
+    </div>
+
+    <div class="cs-impact reveal">
+      <div class="cs-metric">
+        <span class="cs-metric-n">15+</span>
+        <span class="cs-metric-l">Field Sessions · India</span>
+      </div>
+      <div class="cs-metric">
+        <span class="cs-metric-n">12</span>
+        <span class="cs-metric-l">Participants · London</span>
+      </div>
+      <div class="cs-metric">
+        <span class="cs-metric-n">2M+</span>
+        <span class="cs-metric-l">Daily Active Users on Platform</span>
+      </div>
+      <div class="cs-metric">
+        <span class="cs-metric-n">1</span>
+        <span class="cs-metric-l">Product Pivot Delivered</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CASE STUDY 04: GOOGLE NBU ── -->
+  <div class="cs">
+    <div class="cs-num-bg">04</div>
+    <div class="cs-meta reveal">
+      <span class="cs-tag" style="background:var(--gold);color:var(--white);border-color:var(--gold);">Google · NBU</span>
+      <span class="cs-tag">India · 2017–2019</span>
+      <span class="cs-tag">Foundational Research</span>
+      <span class="cs-tag">Cross-Cultural</span>
+    </div>
+    <h3 class="cs-heading reveal">Design for users you haven't met yet.</h3>
+    <p class="cs-hook reveal">Google's Next Billion Users initiative asked: what does onboarding look like for someone who has never held a smartphone before? The answer required unlearning almost everything standard UX research assumes.</p>
+
+    <div class="cs-visual reveal">
+      <span class="cs-visual-label">Project image — add yours here</span>
+      <span class="cs-visual-corner">Google NBU · Tier 2 Cities, India</span>
+    </div>
+
+    <div class="cs-cols">
+      <div class="reveal">
+        <span class="cs-col-label">The Situation</span>
+        <p class="cs-col-text">First-time smartphone users in Tier 2 Indian cities, across varied literacy levels and languages. Google products had been designed by teams whose assumptions about users bore almost no relation to this context. My job was to surface the gap — accurately and without romanticising it.</p>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <span class="cs-col-label">What I Found</span>
+        <p class="cs-col-text">Three findings that changed the framing: <strong>visual literacy is not universal</strong> — icons the team treated as obvious carried no meaning. <strong>Social help-seeking is the recovery mode</strong> — users asked the person next to them, not the interface. And <strong>apprehensiveness is independent of capability</strong> — users who could complete a task hesitated because the cost of making a mistake felt too high. Permission prompts were the sharpest friction point.</p>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <span class="cs-col-label">What Changed</span>
+        <p class="cs-col-text">Findings were presented to the Google US team and added to the internal research repository. The research shaped the direction of follow-on NBU studies. More importantly, it shaped how I approach every cross-cultural study since: <strong>the failure is sometimes in the researcher's frame, not the product's design</strong>. Cross-cultural research teaches you to tell the difference — if you're paying attention.</p>
+      </div>
+    </div>
+
+    <div class="cs-quote reveal">
+      <p>"Sometimes the failure is in the researcher's frame, not the product's design. Cross-cultural research teaches you to tell the difference — if you're paying attention."</p>
+    </div>
+
+    <div class="cs-impact reveal">
+      <div class="cs-metric">
+        <span class="cs-metric-n">9</span>
+        <span class="cs-metric-l">Participants</span>
+      </div>
+      <div class="cs-metric">
+        <span class="cs-metric-n">3</span>
+        <span class="cs-metric-l">Tier 2 Cities</span>
+      </div>
+      <div class="cs-metric">
+        <span class="cs-metric-n">50+</span>
+        <span class="cs-metric-l">Studies Coordinated at Google</span>
+      </div>
+      <div class="cs-metric">
+        <span class="cs-metric-n">10+</span>
+        <span class="cs-metric-l">Countries Researched (career)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CLOSING
+═══════════════════════════════════ -->
+<section id="closing">
+  <div class="closing-content">
+    <div class="closing-label reveal">What I am looking for</div>
+    <h2 class="closing-heading reveal">
+      A seat at the table where<br>
+      <em>strategy gets made.</em>
+    </h2>
+    <p class="closing-text reveal">
+      Nine years in, I know the difference between a researcher who runs good studies and one who <strong>changes what gets built</strong>. I have worked where there was no infrastructure and built it. I have worked where no prior research existed and established the evidence base. I have used AI to accelerate my workflow and have enough experience to know where it helps and where it needs watching.
+      <br><br>
+      I am based in Bangalore and actively exploring roles in <strong>the Netherlands</strong>. If you are building something that needs to work for people who do not look like your product team, I would like to talk.
+    </p>
+    <div class="closing-actions reveal">
+      <a href="mailto:durba811@gmail.com" class="btn-light">durba811@gmail.com</a>
+      <a href="#" class="btn-outline-light">View LinkedIn</a>
+    </div>
+    <div class="closing-contact reveal">
+      <div class="closing-contact-item">
+        Location
+        <span>Bangalore, India</span>
+      </div>
+      <div class="closing-contact-item">
+        Phone
+        <span>+91 9845729424</span>
+      </div>
+      <div class="closing-contact-item">
+        Availability
+        <span>Open to EU roles</span>
+      </div>
+      <div class="closing-contact-item">
+        Visa
+        <span>Requires sponsorship</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Durba Chatterjee · UX Research Portfolio · 2026</p>
+  <p>To add your photo and project images, replace the placeholder boxes with &lt;img&gt; tags</p>
+</footer>
+
+<script>
+// Scroll-triggered reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav shadow on scroll
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+</script>
+</body>
+</html>

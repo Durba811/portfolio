@@ -31,6 +31,11 @@ body {
   font-size: 16px;
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
 }
 
 /* REVEAL */
@@ -53,6 +58,27 @@ nav {
 nav.scrolled { border-color:var(--border); }
 .nav-name { font-family:var(--serif); font-size:18px; font-weight:600; color:var(--ink); letter-spacing:0.02em; }
 .nav-links { display:flex; gap:36px; }
+.nav-toggle {
+  display:none;
+  width:42px;
+  height:42px;
+  border:1px solid var(--border);
+  background:rgba(253,250,244,0.68);
+  cursor:pointer;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:5px;
+}
+.nav-toggle span {
+  width:18px;
+  height:1px;
+  background:var(--ink);
+  transition:transform 0.25s ease, opacity 0.25s ease;
+}
+nav.menu-open .nav-toggle span:nth-child(1) { transform:translateY(6px) rotate(45deg); }
+nav.menu-open .nav-toggle span:nth-child(2) { opacity:0; }
+nav.menu-open .nav-toggle span:nth-child(3) { transform:translateY(-6px) rotate(-45deg); }
 .nav-links a {
   font-size:12px; font-weight:500; letter-spacing:0.08em;
   text-transform:uppercase; color:var(--ink-2); text-decoration:none;
@@ -114,6 +140,18 @@ nav.scrolled { border-color:var(--border); }
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
 }
 .photo-placeholder span { font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-3); font-weight:500; }
+.photo-placeholder span:has(img) {
+  display:block;
+  width:100%;
+  height:100%;
+  letter-spacing:0;
+}
+.photo-placeholder img {
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
 .hero-companies { padding:24px 40px; border-top:1px solid var(--border); }
 .hero-companies-label { font-size:15px; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-3); margin-bottom:10px; }
 .hero-companies-list { display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
@@ -350,6 +388,59 @@ nav.scrolled { border-color:var(--border); }
   display:inline-block;
   box-shadow:0 4px 32px rgba(24,20,13,0.1);
 }
+.cs-img-wrap img,
+.lab-img-wrap img {
+  cursor: zoom-in;
+  transform: translateY(0) scale(1);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, filter 0.28s ease;
+}
+.cs-img-wrap img:hover,
+.lab-img-wrap img:hover,
+.cs-img-wrap img:focus,
+.lab-img-wrap img:focus {
+  transform: translateY(-4px) scale(1.012);
+  box-shadow:0 10px 42px rgba(24,20,13,0.18);
+  filter:saturate(1.02) contrast(1.02);
+}
+.cs-img-wrap,
+.lab-img-wrap {
+  position:relative;
+}
+.image-modal {
+  position:fixed;
+  inset:0;
+  z-index:500;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  background:rgba(24,20,13,0.78);
+  backdrop-filter: blur(10px);
+}
+.image-modal.open { display:flex; }
+.image-modal img {
+  max-width:min(96vw, 1280px);
+  max-height:90vh;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  box-shadow:0 18px 70px rgba(0,0,0,0.35);
+  background:var(--cream);
+}
+.image-modal-close {
+  position:absolute;
+  top:18px;
+  right:18px;
+  width:42px;
+  height:42px;
+  border:1px solid rgba(255,255,255,0.3);
+  background:rgba(24,20,13,0.45);
+  color:var(--white);
+  font-family:var(--sans);
+  font-size:26px;
+  line-height:1;
+  cursor:pointer;
+}
 
 .cs-cols { display:grid; grid-template-columns:repeat(3,1fr); gap:40px; margin-bottom:48px; }
 .cs-col-label {
@@ -448,16 +539,53 @@ footer p { font-size:11px; color:rgba(255,255,255,0.3); }
 
 /* RESPONSIVE */
 @media (max-width:900px) {
-  nav { padding:16px 24px; }
-  .nav-links { gap:20px; }
-  #hero { grid-template-columns:1fr; }
-  .hero-right { display:none; }
-  .hero-left { padding:100px 24px 60px; }
+  html, body { width:100%; max-width:100%; overflow-x:hidden; }
+  nav { padding:14px 20px; }
+  .nav-toggle { display:flex; }
+  .nav-links {
+    position:absolute;
+    top:100%;
+    left:16px;
+    right:16px;
+    display:none;
+    flex-direction:column;
+    gap:0;
+    padding:10px 0;
+    background:rgba(253,250,244,0.98);
+    border:1px solid var(--border);
+    box-shadow:0 16px 38px rgba(24,20,13,0.12);
+  }
+  nav.menu-open .nav-links { display:flex; }
+  .nav-links a {
+    display:block;
+    padding:14px 18px;
+  }
+  .nav-links a::after { display:none; }
+  #hero { grid-template-columns:1fr; min-height:auto; padding-top:72px; }
+  .hero-left { padding:56px 24px 36px; }
+  .hero-right {
+    display:flex;
+    min-height:auto;
+    padding:0 24px 32px;
+    background:var(--parchment);
+  }
+  .hero-photo-area { padding:0; }
+  .photo-placeholder {
+    width:100%;
+    max-width:360px;
+    height:auto;
+    aspect-ratio:4/5;
+    border:0;
+    box-shadow:0 10px 36px rgba(24,20,13,0.12);
+  }
+  .hero-companies { display:none; }
+  .hero-actions { flex-direction:column; align-items:stretch; }
+  .hero-actions a { text-align:center; }
   #stats { grid-template-columns:repeat(2,1fr); padding:40px 24px; gap:24px; }
   .stat-item { padding:0; border:none; }
   #impact-strip { padding:32px 24px; }
-  .impact-grid { grid-template-columns:repeat(3,1fr); gap:20px; }
-  .impact-cell { border:none; }
+  .impact-grid { grid-template-columns:repeat(2,1fr); gap:20px; }
+  .impact-cell { border:none; padding:0 8px; }
   #about { padding:60px 24px; }
   .about-grid { grid-template-columns:1fr; gap:40px; }
   #journey { padding:60px 24px; }
@@ -506,12 +634,36 @@ footer p { font-size:11px; color:rgba(255,255,255,0.3); }
   .work-header { padding:60px 24px 40px; flex-direction:column; gap:16px; }
   .work-sub { text-align:left; }
   .cs { padding:60px 24px; }
+  .cs-num-bg { right:18px; font-size:96px; }
+  .cs-meta { gap:6px; }
+  .cs-tag { font-size:9px; padding:4px 9px; }
+  .cs-img-wrap img, .lab-img-wrap img { max-width:100%; }
   .cs-cols { grid-template-columns:1fr; gap:24px; }
-  .iter-row { grid-template-columns:repeat(2,1fr); }
-  .lab-block { grid-template-columns:1fr; }
+  .iter-row { grid-template-columns:1fr; }
+  .cs-impact { flex-direction:column; }
+  .cs-metric { border-right:none; border-bottom:1px solid var(--border); }
+  .cs-metric:last-child { border-bottom:none; }
+  .lab-block { grid-template-columns:1fr; padding:28px 24px; }
+  .lab-stat-row { flex-direction:column; gap:4px; align-items:flex-start; }
   #closing { padding:80px 24px; }
+  .closing-actions { flex-direction:column; gap:12px; margin-bottom:44px; }
   .closing-contact { flex-direction:column; gap:20px; align-items:center; }
+  .image-modal { padding:14px; }
+  .image-modal-close { top:12px; right:12px; }
   footer { padding:20px 24px; flex-direction:column; gap:8px; text-align:center; }
+}
+
+@media (max-width:520px) {
+  body { font-size:15px; }
+  .hero-name { font-size:clamp(46px, 16vw, 62px); }
+  .hero-bio, .cs-hook, .about-text p, .closing-text { font-size:16px; }
+  #stats, .impact-grid { grid-template-columns:1fr; }
+  .stat-item, .impact-cell { padding:14px 0; border-bottom:1px solid rgba(24,20,13,0.08); }
+  #stats .stat-item { border-bottom:1px solid rgba(255,255,255,0.1); }
+  .stat-item:last-child, .impact-cell:last-child { border-bottom:none; }
+  .cs-heading { font-size:38px; }
+  .cs-quote { padding:18px 20px; }
+  .cs-quote p { font-size:21px; }
 }
 </style>
 </head>
@@ -520,6 +672,11 @@ footer p { font-size:11px; color:rgba(255,255,255,0.3); }
 <!-- NAV -->
 <nav id="mainNav">
   <div class="nav-name">Durba Chatterjee</div>
+  <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#journey">Journey</a>
@@ -776,9 +933,6 @@ footer p { font-size:11px; color:rgba(255,255,255,0.3); }
     </div>
     <h3 class="cs-heading reveal">When the research said stop.</h3>
     <p class="cs-hook reveal">HP had a P0 mandate to enter the PVC card printing market. Research across 5 cities and 30+ jobbers revealed the product would hurt the brand before it helped it. An estimated $1M+ in at-risk launch investment was protected.</p>
-    <div class="cs-placeholder reveal">
-      <span class="cs-placeholder-label">Project image coming soon</span>
-    </div>
     <div class="cs-img-wrap reveal">
       <img src="assets/hp_vs_competion_wf.png" alt="HP VS Competition Overview" loading="lazy">
       <div class="cs-img-caption">HP VS Competition Overview</div>
@@ -1004,12 +1158,12 @@ footer p { font-size:11px; color:rgba(255,255,255,0.3); }
       <p class="closing-value-text">Operating as the sole researcher across a large product portfolio, I functioned as the de facto owner of research direction for years: identifying gaps, initiating projects without a brief, and making calls that changed roadmaps. I am now looking for a role where <strong>that instinct is the formal scope,</strong> not a side effect of being the only researcher in the room. Mixed research and strategy, with cross-functional influence built in from the start.</p>
     </div>
     <div class="closing-actions reveal">
-      <a href="mailto:durba811@gmail.com" class="btn-light">durba811@gmail.com</a>
-      <a href="#" class="btn-outline-light">View LinkedIn</a>
+      <a href="mailto:durba811@gmail.com" class="btn-light">Mail Durba</a>
+      <a href="#" class="btn-outline-light">Schedule a Call</a>
+      <a href="https://www.linkedin.com/in/durba-chatterjee/" class="btn-outline-light" target="_blank" rel="noopener noreferrer">View LinkedIn</a>
     </div>
     <div class="closing-contact reveal">
       <div class="closing-contact-item">Location<span>Bangalore, India</span></div>
-      <div class="closing-contact-item">Phone<span>+91 9845729424</span></div>
       <div class="closing-contact-item">Open To<span>Global Opportunities</span></div>
       <div class="closing-contact-item">Visa<span>Requires Sponsorship</span></div>
     </div>
@@ -1020,6 +1174,11 @@ footer p { font-size:11px; color:rgba(255,255,255,0.3); }
   <p>Durba Chatterjee · UX Research Portfolio · 2026</p>
 </footer>
 
+<div class="image-modal" id="imageModal" aria-hidden="true" role="dialog" aria-modal="true">
+  <button class="image-modal-close" type="button" aria-label="Close expanded image">×</button>
+  <img src="" alt="">
+</div>
+
 <script>
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -1027,8 +1186,67 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
 const nav = document.getElementById('mainNav');
+const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelectorAll('.nav-links a');
+
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+if (navToggle) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('menu-open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+}
+
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    nav.classList.remove('menu-open');
+    if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
+const imageModal = document.getElementById('imageModal');
+const imageModalImg = imageModal ? imageModal.querySelector('img') : null;
+const imageModalClose = imageModal ? imageModal.querySelector('.image-modal-close') : null;
+const zoomableImages = document.querySelectorAll('.cs-img-wrap img, .lab-img-wrap img');
+
+function closeImageModal() {
+  if (!imageModal || !imageModalImg) return;
+  imageModal.classList.remove('open');
+  imageModal.setAttribute('aria-hidden', 'true');
+  imageModalImg.src = '';
+  imageModalImg.alt = '';
+  document.body.style.overflow = '';
+}
+
+zoomableImages.forEach(img => {
+  img.setAttribute('tabindex', '0');
+  img.addEventListener('click', () => {
+    if (!imageModal || !imageModalImg) return;
+    imageModalImg.src = img.currentSrc || img.src;
+    imageModalImg.alt = img.alt || '';
+    imageModal.classList.add('open');
+    imageModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    imageModalClose?.focus();
+  });
+  img.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      img.click();
+    }
+  });
+});
+
+imageModalClose?.addEventListener('click', closeImageModal);
+imageModal?.addEventListener('click', (event) => {
+  if (event.target === imageModal) closeImageModal();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') closeImageModal();
+});
 </script>
 </body>
 </html>

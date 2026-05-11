@@ -140,17 +140,21 @@ nav.menu-open .nav-toggle span:nth-child(3) { transform:translateY(-6px) rotate(
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
 }
 .photo-placeholder span { font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink-3); font-weight:500; }
-.photo-placeholder span:has(img) {
-  display:block;
-  width:100%;
-  height:100%;
-  letter-spacing:0;
+.hero-portrait-card {
+  width:min(72%, 460px);
+  height:min(68vh, 620px);
+  min-height:440px;
+  border:0;
+  overflow:hidden;
+  background:var(--parchment);
+  box-shadow:0 18px 54px rgba(24,20,13,0.16);
 }
-.photo-placeholder img {
+.hero-portrait-card img {
   width:100%;
   height:100%;
   display:block;
   object-fit:cover;
+  object-position:center center;
 }
 .hero-companies { padding:24px 40px; border-top:1px solid var(--border); }
 .hero-companies-label { font-size:15px; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-3); margin-bottom:10px; }
@@ -570,10 +574,11 @@ footer p { font-size:11px; color:rgba(255,255,255,0.3); }
     background:var(--parchment);
   }
   .hero-photo-area { padding:0; }
-  .photo-placeholder {
+  .hero-portrait-card {
     width:100%;
     max-width:360px;
     height:auto;
+    min-height:0;
     aspect-ratio:4/5;
     border:0;
     box-shadow:0 10px 36px rgba(24,20,13,0.12);
@@ -701,12 +706,8 @@ footer p { font-size:11px; color:rgba(255,255,255,0.3); }
   </div>
   <div class="hero-right">
     <div class="hero-photo-area">
-      <div class="photo-placeholder">
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-          <circle cx="20" cy="14" r="7" stroke="#A09585" stroke-width="1.5"/>
-          <path d="M6 36c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#A09585" stroke-width="1.5"/>
-        </svg>
-        <span><img src="assets/durba.png" alt="Durba Chatterjee" loading="lazy"></span>
+      <div class="photo-placeholder hero-portrait-card">
+        <img src="assets/durba.png" alt="Durba Chatterjee" loading="lazy">
       </div>
     </div>
     <div class="hero-companies">
@@ -1159,7 +1160,7 @@ footer p { font-size:11px; color:rgba(255,255,255,0.3); }
     </div>
     <div class="closing-actions reveal">
       <a href="mailto:durba811@gmail.com" class="btn-light">Mail Durba</a>
-      <a href="#" class="btn-outline-light">Schedule a Call</a>
+      <a href="https://calendar.app.google/hMKLmbsm4Eno7PkEA" class="btn-outline-light" target="_blank" rel="noopener noreferrer">Schedule a Call</a>
       <a href="https://www.linkedin.com/in/durba-chatterjee/" class="btn-outline-light" target="_blank" rel="noopener noreferrer">View LinkedIn</a>
     </div>
     <div class="closing-contact reveal">

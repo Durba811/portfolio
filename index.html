@@ -1449,30 +1449,209 @@ p { text-wrap:pretty; }
   .pvc-photo-block img[src$=".gif"] { height:230px; }
 }
 
+
+
+/* ═══ FINAL REQUEST PASS: responsive companies, achievements section, focused contact target ═══ */
+.company-badge {
+  color:var(--terracotta) !important;
+}
+.hero-companies {
+  background:rgba(253,250,244,0.08);
+}
+.hero-companies-list {
+  row-gap:8px;
+}
+
+#achievements {
+  padding:100px 56px;
+  background:linear-gradient(180deg, var(--parchment) 0%, var(--cream) 100%);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.achievements-inner {
+  max-width:1100px;
+  margin:0 auto;
+}
+.achievements-header {
+  max-width:780px;
+  margin-bottom:42px;
+}
+.achievements-kicker {
+  display:block;
+  margin-bottom:14px;
+  color:var(--terracotta);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+}
+.achievements-heading {
+  font-family:var(--serif);
+  font-size:clamp(34px, 4.4vw, 56px);
+  font-weight:300;
+  line-height:1.08;
+  color:var(--ink);
+  margin-bottom:18px;
+}
+.achievements-sub {
+  color:var(--ink-2);
+  font-size:clamp(16.5px, 1.05vw, 18px);
+  line-height:1.78;
+  font-weight:400;
+}
+.achievement-lab-grid {
+  display:grid;
+  grid-template-columns:minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap:28px;
+  align-items:stretch;
+}
+.achievement-lab-media,
+.achievement-lab-copy {
+  min-width:0;
+}
+.achievement-lab-media .lab-img-wrap {
+  height:100%;
+  margin:0;
+  background:var(--parchment-2);
+  border:1px solid rgba(24,20,13,0.12);
+  box-shadow:0 16px 44px rgba(24,20,13,0.08);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:18px;
+}
+.achievement-lab-media .lab-img-wrap img {
+  width:100%;
+  max-width:none;
+  height:auto;
+  max-height:440px;
+  object-fit:contain;
+  box-shadow:none;
+}
+.achievement-lab-copy .lab-block {
+  height:100%;
+  margin:0;
+  grid-template-columns:1fr;
+  gap:28px;
+  padding:34px 36px;
+  box-shadow:0 16px 44px rgba(24,20,13,0.10);
+}
+.achievement-lab-copy .lab-block-title {
+  font-size:clamp(27px, 2.6vw, 36px);
+  line-height:1.15;
+  margin-bottom:16px;
+}
+.achievement-lab-copy .lab-stats {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px 20px;
+  align-content:end;
+}
+.achievement-lab-copy .lab-stat-row {
+  display:block;
+  padding-top:14px;
+  border-top:1px solid rgba(255,255,255,0.16);
+}
+.achievement-lab-copy .lab-stat-n {
+  display:block;
+  margin-bottom:6px;
+}
+
+#contact-durba {
+  scroll-margin-top:130px;
+  padding:22px;
+  border:1px solid rgba(255,255,255,0.16);
+  background:rgba(255,255,255,0.05);
+  box-shadow:0 18px 54px rgba(0,0,0,0.12);
+}
+#contact-durba:target {
+  animation:contactFocusPulse 1.1s ease-out 1;
+  border-color:rgba(255,255,255,0.42);
+  background:rgba(255,255,255,0.09);
+}
+@keyframes contactFocusPulse {
+  0% { transform:translateY(6px); box-shadow:0 0 0 0 rgba(255,255,255,0.26); }
+  60% { transform:translateY(0); box-shadow:0 0 0 14px rgba(255,255,255,0); }
+  100% { transform:translateY(0); box-shadow:0 18px 54px rgba(0,0,0,0.12); }
+}
+
+@media (max-width:900px) {
+  .hero-right {
+    padding:0 24px 28px !important;
+    background:var(--parchment-2) !important;
+  }
+  .hero-companies {
+    display:block !important;
+    width:100%;
+    padding:18px 0 0 !important;
+    margin-top:18px;
+    border-top:1px solid rgba(24,20,13,0.10) !important;
+  }
+  .hero-companies-label {
+    text-align:center;
+    font-size:10px;
+    margin-bottom:8px;
+    color:var(--ink-3);
+  }
+  .hero-companies-list {
+    justify-content:center;
+    gap:10px 12px;
+  }
+  .company-badge {
+    font-size:clamp(19px, 5vw, 24px) !important;
+    line-height:1.1;
+  }
+  #achievements {
+    padding:64px 24px;
+  }
+  .achievement-lab-grid {
+    grid-template-columns:1fr;
+  }
+  .achievement-lab-media .lab-img-wrap {
+    height:auto;
+  }
+  .achievement-lab-copy .lab-block {
+    padding:28px 24px;
+  }
+  .achievement-lab-copy .lab-stats {
+    grid-template-columns:1fr 1fr;
+  }
+  #contact-durba {
+    scroll-margin-top:96px;
+    flex-direction:column;
+    padding:18px;
+  }
+}
+@media (max-width:520px) {
+  .hero-companies-list span[style] {
+    display:none;
+  }
+  .hero-companies-list {
+    gap:8px;
+  }
+  .company-badge {
+    padding:6px 10px;
+    background:rgba(181,80,44,0.08);
+    border:1px solid rgba(181,80,44,0.16);
+  }
+  .achievement-lab-copy .lab-stats {
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
 <body>
 <!-- NAV -->
 <nav class="site-header-minimal" id="mainNav">
 <a class="nav-name" href="#about">Durba Chatterjee</a>
-<a class="top-reach-link" href="#closing">Reach me</a>
+<a class="top-reach-link" href="#contact-durba">Reach me</a>
 </nav>
 <!-- GLOBAL FLOATING OUTLINE -->
 <aside aria-label="Portfolio navigation" class="floating-outline collapsed" id="floatingOutline">
 <button aria-expanded="false" aria-label="Toggle portfolio navigation" class="floating-outline-toggle" type="button">Explore</button>
 <div class="floating-outline-panel">
 <div class="floating-outline-title">Explore Portfolio</div>
-<div class="floating-outline-list">
-<a href="#about"><span class="outline-index">01</span><span class="outline-text"><span class="outline-kicker">Profile</span>Research point of view</span></a>
-<a href="#researcher"><span class="outline-index">02</span><span class="outline-text"><span class="outline-kicker">Practice</span>Methods and strengths</span></a>
-<a href="#journey"><span class="outline-index">03</span><span class="outline-text"><span class="outline-kicker">Growth</span>Career journey</span></a>
-<a href="#work"><span class="outline-index">04</span><span class="outline-text"><span class="outline-kicker">Portfolio</span>Selected studies</span></a>
-<a href="#pvc-card-research"><span class="outline-index">4.1</span><span class="outline-text"><span class="outline-kicker">HP India</span>PVC market-entry decision</span></a>
-<a href="#control-panel-research"><span class="outline-index">4.2</span><span class="outline-text"><span class="outline-kicker">HP Global</span>Control panel evolution</span></a>
-<a href="#ola-help-center-research"><span class="outline-index">4.3</span><span class="outline-text"><span class="outline-kicker">Ola</span>Driver-partner field research</span></a>
-<a href="#google-assistant-research"><span class="outline-index">4.4</span><span class="outline-text"><span class="outline-kicker">Google NBU</span>First-time smartphone users</span></a>
-<a href="#closing"><span class="outline-index">05</span><span class="outline-text"><span class="outline-kicker">Reach me</span>Contact Durba</span></a>
-</div>
+<div class="floating-outline-list"><a href="#about"><span class="outline-index">01</span><span class="outline-text"><span class="outline-kicker">Profile</span>Research point of view</span></a><a href="#researcher"><span class="outline-index">02</span><span class="outline-text"><span class="outline-kicker">Practice</span>Methods and strengths</span></a><a href="#achievements"><span class="outline-index">03</span><span class="outline-text"><span class="outline-kicker">Recognition</span>Achievements and lab impact</span></a><a href="#journey"><span class="outline-index">04</span><span class="outline-text"><span class="outline-kicker">Growth</span>Career journey</span></a><a href="#work"><span class="outline-index">05</span><span class="outline-text"><span class="outline-kicker">Portfolio</span>Selected studies</span></a><a href="#pvc-card-research"><span class="outline-index">5.1</span><span class="outline-text"><span class="outline-kicker">HP India</span>PVC market-entry decision</span></a><a href="#control-panel-research"><span class="outline-index">5.2</span><span class="outline-text"><span class="outline-kicker">HP Global</span>Control panel evolution</span></a><a href="#ola-help-center-research"><span class="outline-index">5.3</span><span class="outline-text"><span class="outline-kicker">Ola</span>Driver-partner field research</span></a><a href="#google-assistant-research"><span class="outline-index">5.4</span><span class="outline-text"><span class="outline-kicker">Google NBU</span>First-time smartphone users</span></a><a href="#contact-durba"><span class="outline-index">06</span><span class="outline-text"><span class="outline-kicker">Reach me</span>Contact Durba</span></a></div>
 </div>
 </aside>
 <!-- HERO -->
@@ -1486,7 +1665,7 @@ p { text-wrap:pretty; }
     </p>
 <div class="hero-actions">
 <a class="btn-primary" href="#work">See My Work</a>
-<a class="btn-ghost" href="#closing">Get in Touch</a>
+<a class="btn-ghost" href="#contact-durba">Get in Touch</a>
 </div>
 </div>
 <div class="hero-right">
@@ -1663,12 +1842,23 @@ p { text-wrap:pretty; }
 </div>
 </div>
 <!-- Lab Block -->
-<div class="researcher-inner" style="margin-top:48px;">
-<div class="lab-img-wrap reveal">
+
+</div>
+</section>
+<!-- ACHIEVEMENTS AND RECOGNITION -->
+<section id="achievements">
+<div class="achievements-inner">
+<div class="achievements-header reveal">
+<span class="achievements-kicker">Achievements and Recognition</span>
+<h2 class="achievements-heading">Research infrastructure that changed how teams worked.</h2>
+<p class="achievements-sub">A dedicated in-house usability lab turned research from a vendor-led activity into an embedded product capability, reducing cost, increasing speed, and bringing stakeholders closer to the evidence.</p>
+</div>
+<div class="achievement-lab-grid">
+<div class="achievement-lab-media reveal"><div class="lab-img-wrap reveal">
 <img alt="HP Usability Lab" loading="lazy" src="assets/HP%20Usability%20Lab.png"/>
 <div class="cs-img-caption" style="text-align:center;margin-top:10px;">HP Usability Lab, India</div>
-</div>
-<div class="lab-block reveal">
+</div></div>
+<div class="achievement-lab-copy reveal reveal-delay-1"><div class="lab-block reveal">
 <div>
 <div class="lab-block-title">Building the Lab That Made It Possible</div>
 <p class="lab-block-text">The business case was built on a straightforward ROI argument: external vendors were costing <strong>$150K annually</strong> with turnaround times that created sprint bottlenecks. An in-house lab would pay for itself within the first year. It was built lean, without expensive equipment, relying entirely on process design and research infrastructure that scaled at low cost.</p>
@@ -1680,10 +1870,11 @@ p { text-wrap:pretty; }
 <div class="lab-stat-row"><span class="lab-stat-n">40%</span><span class="lab-stat-l">Studies conducted internally</span></div>
 <div class="lab-stat-row"><span class="lab-stat-n">30-40%</span><span class="lab-stat-l">Increase in stakeholder session attendance</span></div>
 </div>
-</div>
+</div></div>
 </div>
 </div>
 </section>
+
 <!-- CAREER JOURNEY -->
 <section id="journey">
 <h2 class="journey-heading reveal">Career Journey</h2>
@@ -2204,11 +2395,8 @@ p { text-wrap:pretty; }
 <p class="closing-text reveal">
       Nine years in, I know the difference between a researcher who runs good studies and one who <strong>changes what gets built.</strong> I have worked where there was no infrastructure and built it. I have worked where no prior research existed and established the evidence base. I am also paying close attention to what AI is doing to user behaviour itself, not just to research workflows. The users I have spent nine years studying are changing how they behave, and AI is a significant part of why. That feels like the most interesting research problem of the next few years.
     </p>
-<div class="closing-value reveal">
-<div class="closing-value-label">Why This Move, Why Now</div>
-<p class="closing-value-text">Operating as the sole researcher across a large product portfolio, I functioned as the de facto owner of research direction for years: identifying gaps, initiating projects without a brief, and making calls that changed roadmaps. I am now looking for a role where <strong>that instinct is the formal scope,</strong> not a side effect of being the only researcher in the room. Mixed research and strategy, with cross-functional influence built in from the start.</p>
-</div>
-<div class="closing-actions reveal">
+
+<div class="closing-actions reveal contact-focus-row" id="contact-durba">
 <a class="btn-light" href="mailto:durba811@gmail.com">Mail Durba</a>
 <a class="btn-outline-light" href="https://calendar.app.google/hMKLmbsm4Eno7PkEA" rel="noopener noreferrer" target="_blank">Schedule a Call</a>
 <a class="btn-outline-light" href="https://www.linkedin.com/in/durba-chatterjee/" rel="noopener noreferrer" target="_blank">View LinkedIn</a>
@@ -2222,9 +2410,6 @@ p { text-wrap:pretty; }
 <footer>
 <p>Durba Chatterjee · UX Research Portfolio · 2026</p>
 </footer>
-
-
-
 <div aria-hidden="true" aria-modal="true" class="image-modal" id="imageModal" role="dialog">
 <button aria-label="Close expanded image" class="image-modal-close" type="button">×</button>
 <img alt="" src=""/>
